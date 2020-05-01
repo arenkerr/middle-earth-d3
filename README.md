@@ -2,7 +2,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Credits
 
-[Middle-Earth Genealogy Project](https://github.com/RobSis/middle-earth-genealogy-project) - source for all Middle-Earth family trees.
+[Middle-Earth Genealogy Project](https://github.com/RobSis/middle-earth-genealogy-project) - source for all Middle-Earth family trees. <br />
 [gedcom-d3](https://www.npmjs.com/package/gedcom-d3) - used to parse gedcom files into d3-capable json.
 
 ## Available Scripts
