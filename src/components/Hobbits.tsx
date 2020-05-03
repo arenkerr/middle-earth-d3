@@ -1,33 +1,39 @@
-import React, { useRef, useCallback } from 'react';
+import React, { useRef, useEffect } from 'react';
+import * as d3 from 'd3'; 
 import { d3ize, parse } from 'gedcom-d3';
-import { ForceGraph3D } from 'react-force-graph';
-import hobbits from '../data/hobbits.js'
+import hobbits from '../data/hobbits.js';
+import { json } from 'd3';
+import buildTree from '../util/buildTree'
 
 function Hobbits() {
-
-    const data = d3ize(parse(hobbits));
-    const graph = useRef() as React.MutableRefObject<any>;
-    
+    // format data for use with D3
+    const data = buildTree(hobbits);
     console.log(data);
+    const graph = useRef() as React.MutableRefObject<SVGSVGElement>;
+    const height = 800;
+    const width = 600;
 
-    const handleClick = useCallback(node => {
-        // Aim at node from outside it
-        const distance = 40;
-        const distRatio = 1 + distance/Math.hypot(node.x, node.y, node.z);
 
-        graph.current.cameraPosition(
-          { x: node.x * distRatio, y: node.y * distRatio, z: node.z * distRatio }, // new position
-          node, // lookAt ({ x, y, z })
-          3000  // ms transition duration
-        );
-      }, [graph]);
+    useEffect(() => {
+        const svgElement = d3.select(graph.current);
+        svgElement
+            .attr("width", width)
+            .attr("height", height);
+
+        svgElement.selectAll('g')
+            .append('circle')
+                .attr("r", 7)
+                .style("fill", '#000000');
+
+    }, [graph, data]);
+
+
 
     return (
-        <ForceGraph3D 
-            graphData={data}
-            onNodeClick={handleClick}
-            ref={graph}
-        />
+        <div className="container">
+            <h1>Hobbits 2D</h1>
+            <svg ref={graph} />
+        </div>
     );
 }
 
