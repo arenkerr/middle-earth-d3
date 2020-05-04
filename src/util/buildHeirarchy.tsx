@@ -1,7 +1,7 @@
 import * as d3 from 'd3'; 
 import { d3ize, parse } from 'gedcom-d3';
 
-export default function buildTree(input) {
+export default function buildHeirarchy(input) {
     const data = d3ize(parse(input));
 
     // organize data into heirarchy by creating a list of parent-child links
@@ -9,7 +9,7 @@ export default function buildTree(input) {
 
     // a "fake root" is provided for nodes without known parents, to prevent multiple root error
     // https://github.com/d3/d3-hierarchy/blob/master/README.md#stratify
-    const fakeRoot = {
+    const root = {
         name: "root",
         parentId: "",
         id: '0',
@@ -27,20 +27,21 @@ export default function buildTree(input) {
                 // find parent/child relationship
                 person.parentId = link.source;
             } 
+            // TODO: find spouse
         })
 
         if (person.parentId === "") {
-            person.parentId = fakeRoot.id;
+            person.parentId = root.id;
         }
         list.push(person);
     });
 
-    list.push(fakeRoot);
+    list.push(root);
 
-    const root = d3.stratify()
-        .id(function(d: any) { return d.id; })
-        .parentId(function(d: any) { return d.parentId; })
+    const heirarchy = d3.stratify()
+        // .id(function(d: any) { return d.id; })
+        // .parentId(function(d: any) { return d.parentId; })
         (list);
     
-    return root;
+    return heirarchy;
 }

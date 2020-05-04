@@ -1,13 +1,11 @@
 import React, { useRef, useEffect } from 'react';
 import * as d3 from 'd3'; 
-import { d3ize, parse } from 'gedcom-d3';
 import hobbits from '../data/hobbits.js';
-import { json } from 'd3';
-import buildTree from '../util/buildTree'
+import buildHeirarchy from '../util/buildHeirarchy'
 
 function Hobbits() {
     // format data for use with D3
-    const data = buildTree(hobbits);
+    const data = buildHeirarchy(hobbits);
     console.log(data);
     const graph = useRef() as React.MutableRefObject<SVGSVGElement>;
     const height = 800;
@@ -31,7 +29,7 @@ function Hobbits() {
 
     return (
         <div className="container">
-            <h1>Hobbits 2D</h1>
+            <h1>Chart</h1>
             <svg ref={graph} />
         </div>
     );
