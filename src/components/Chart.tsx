@@ -7,11 +7,11 @@ import buildHeirarchy from '../util/buildHeirarchy'
 function Chart() {
     // format data for use with D3
     const data = buildHeirarchy(elves);
-    console.log(data);
-
     const graph = useRef() as React.MutableRefObject<SVGSVGElement>;
-    const height = 6000;
+    const height = 1000;
     const width = 6000;
+
+    // console.log(data);
 
     useEffect(() => {
         const svgElement = d3.select(graph.current);
@@ -26,39 +26,52 @@ function Chart() {
 
         const root = d3.hierarchy(data, d => d.children);
         cluster(root);
+        console.log(root);
 
-        console.log('root', root.descendants().slice(1));
+        root.children?.forEach((child: any) => {
+            if (child.parent.data.id === "0") {
+                child.y = 40;
+            }
+        })
 
         // paths
         svgElement.selectAll('path')
-            .data( root.descendants().slice(1) )
+            .data(root.descendants().slice(1))
             .enter()
             .append('path')
-            .attr("d", function(d: any) {
-                return "M" + d.x + "," + d.y
-                        + "C" + d.parent.x + "," + d.y
-                        + " " + d.parent.x + "," + d.parent.y 
-                        + " " + d.parent.x + "," + d.parent.y;
+            .attr("d", (d: any) => {
+                if (d.parent.data.id !== "0" && d.data.data.render === true) {
+                    return "M" + d.x + "," + d.y
+                            + "C" + d.parent.x + "," + d.y
+                            + " " + d.parent.x + "," + d.parent.y 
+                            + " " + d.parent.x + "," + d.parent.y;
+                }
+
+                return null;
                     })
             .style("fill", 'none')
             .attr("stroke", '#ccc')
         
         // nodes
+
         svgElement.selectAll("g")
             .data(root.descendants())
             .enter()
             .append("g")
-            .attr("transform", function(d: any) {
-                return "translate(" + d.x + "," + d.y + ")"
+            .attr("transform", (d: any) => {
+                if (d.data.data.render === true) {
+                    return "translate(" + d.x + "," + d.y + ")"
+                }
+                return null;
             })
             .append("text").text(function(d: any) { 
-                console.log(d.data.data.name)
-                return d.data.data.name})
-            .append("circle")
-                .attr("r", 7)
-                .style("fill", "#69b3a2")
-                .attr("stroke", "black")
-                .style("stroke-width", 2);
+                if (d.data.data.spouse.name !== undefined) {
+                    return d.data.data.name + " " + d.data.data.spouse.name
+                }
+                if (d.data.data.render === true) {
+                return d.data.data.name
+                }
+            })
 
     }, [graph, data]);
 

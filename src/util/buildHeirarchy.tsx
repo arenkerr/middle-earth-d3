@@ -1,3 +1,4 @@
+
 import * as d3 from 'd3'; 
 import { d3ize, parse } from 'gedcom-d3';
 import buildProfile from './buildProfile';
@@ -15,16 +16,16 @@ export default function buildHeirarchy(input: any) {
         parentId: "",
         id: '0',
     }
-
-    console.log(data.nodes)
-
+    
     data.nodes.forEach(node => {
         let person = {
             name: node.name,
             parentId: "",
             id: node.id,
             spouseId: "",
+            spouse: {},
             profile: buildProfile(node),
+            render: true,
         }
 
         data.links.forEach(link => {
@@ -46,7 +47,35 @@ export default function buildHeirarchy(input: any) {
 
     list.push(root);
 
-    const heirarchy = d3.stratify()(list);
-    
+    // get spouses & set render property to false
+    const getSpouse = (spouseId : string) => {
+        let spouse = list.filter(person => person.id === spouseId)[0];
+
+        list.map(person => {
+            if (person.id === spouseId) {
+                person.render = false;
+            }
+            return person;
+        });
+
+        return spouse;
+    }
+
+    list.map(person => {
+        if (person.spouseId) {
+            person.spouse = getSpouse(person.spouseId);
+        }
+
+        return person;
+    })
+
+
+    let heirarchy = d3.stratify()
+    .id(function(d: any) { return d.id; })
+    .parentId(function(d: any) { return d.parentId; })
+    (list);
+
+    // console.log(heirarchy);
+
     return heirarchy;
 }
