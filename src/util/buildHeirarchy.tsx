@@ -16,7 +16,7 @@ export default function buildHeirarchy(input: any) {
         parentId: "",
         id: '0',
     }
-    
+
     data.nodes.forEach(node => {
         let person = {
             name: node.name,
@@ -25,7 +25,7 @@ export default function buildHeirarchy(input: any) {
             spouseId: "",
             spouse: {},
             profile: buildProfile(node),
-            render: true,
+            husband: false, // this heirarchy is matrilineal, children appear with mother. this prop will link husband to child.
         }
 
         data.links.forEach(link => {
@@ -48,12 +48,15 @@ export default function buildHeirarchy(input: any) {
     list.push(root);
 
     // get spouses & set render property to false
-    const getSpouse = (spouseId : string) => {
+    const getSpouse = (spouseId: string, wife) => {
         let spouse = list.filter(person => person.id === spouseId)[0];
 
         list.map(person => {
             if (person.id === spouseId) {
-                person.render = false;
+                
+                person.husband = person.profile.sex === 'M' ? true : false;
+                person.spouse = wife;
+                person.spouseId = wife.id;
             }
             return person;
         });
@@ -63,7 +66,7 @@ export default function buildHeirarchy(input: any) {
 
     list.map(person => {
         if (person.spouseId) {
-            person.spouse = getSpouse(person.spouseId);
+            person.spouse = getSpouse(person.spouseId, person);
         }
 
         return person;
