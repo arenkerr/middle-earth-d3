@@ -3,7 +3,7 @@ import * as d3 from 'd3';
 import hobbits from '../data/hobbits.js';
 import elves from '../data/elves.js';
 import buildHeirarchy from '../util/buildHeirarchy';
-import { svg } from 'd3';
+import buildTable from '../util/buildTable';
 
 function Chart() {
     // format data for use with D3
@@ -30,18 +30,10 @@ function Chart() {
         console.log(root.children);
 
         // create a hash table of ids and coords, used for location of spouse
-        let nodeLocation = {};
+        let nodeLocation = buildTable(root);
 
-        function makeTable(root) {
-            root.children.forEach(node => {
-                nodeLocation[node.data.id] = {x: node.x, y: node.y}
-                if (node.children) {
-                    return makeTable(node)
-                } 
-            } )
-        }
-
-        makeTable(root);
+        // conditional rendering to handle spouses
+        const spouseCheck = (node, renderVal) => node.parent.data.id === '0' && node.data.data.husband === true ? null : renderVal;
 
         // paths from child to parent
         svgElement.selectAll('path')
@@ -61,7 +53,7 @@ function Chart() {
             .style('fill', 'none')
             .attr('stroke', '#ccc');
 
-        // paths from child to their spouse
+        // paths from person to spouse
         const spousePath = svgElement.selectAll('g')
             .data(root.descendants().slice(1))
             .enter()
@@ -80,39 +72,25 @@ function Chart() {
             .style('opacity', 0.05)
             .attr('stroke', '#000FFF')
             .attr('class', 'path-spouse')
-            .attr('id', (d: any) => {
-                console.log(d.data.data.id)
-                return d.data.data.id;
-            })
+            .attr('id', (d: any) => d.data.data.id);
 
         // add circles for nodes
-        const circle = svgElement.selectAll('g')
+        svgElement.selectAll('g')
             .data(root.descendants().slice(1))
             .enter()
             .append('g')
-            .attr('transform', (d: any) => {
-                if (d.parent.data.id === '0' && d.data.data.husband === true) {
-                    return null;
-                }
-                return 'translate(' + d.y + ',' + d.x + ')'
-            })
+            .attr('transform', (d: any) => spouseCheck(d, 'translate(' + d.y + ',' + d.x + ')'))
             .attr('class', 'child')
                 .append('circle')
-                    .attr('r', (d: any) => {
-                        if (d.parent.data.id === '0' && d.data.data.husband === true) {
-                            return null;
-                        }
-                        return 6;
-                    })
+                    .attr('r', (d: any) => spouseCheck(d, 6))
                     .style('fill', '#ccc')
                     .on('click', (d: any, i, n) => {
                         const path: any = document.getElementById(d.data.data.id)
-                        console.log(path)
                         path.setAttribute('style', 'opacity: 1');
                         spousePath.style('fill', 'none');
-                    } )
+                    });
         
-        // add names
+        // add text elements for name labels
         svgElement.selectAll('child')
             .data(root.descendants().slice(1))
             .enter()
@@ -120,37 +98,22 @@ function Chart() {
                 .attr('transform', (d: any) => {
                     return `translate(${d.y - 25},${d.x + 25})`
                 })
-                .text(function(d: any) { 
-                    if (d.parent.data.id === '0' && d.data.data.husband === true) {
-                        return null;
-                    }
-                    return d.data.data.name 
-                })
-                .style('fill', '#000000')
+                .text((d: any) => spouseCheck(d, d.data.data.name ))
+                .style('fill', '#000000');
 
-        // add names of husbands next to wife
+        // add husbands' name next to wife
         svgElement.selectAll('child')
             .data(root.descendants().slice(1))
             .enter()
             .append('text')
             .attr('transform', (d: any) => {
-                if (d.data.data.husband === true) {
-                    // move node near spouse 
-                    return `translate(${nodeLocation[d.data.data.spouseId].y - 25},${nodeLocation[d.data.data.spouseId].x - 15})`
-                }
-                return null;
+                return d.data.data.husband === true 
+                    ? `translate(${nodeLocation[d.data.data.spouseId].y - 25},${nodeLocation[d.data.data.spouseId].x - 15})` 
+                    : null
             })
-            .text(function(d: any) { 
-                if (d.data.data.husband === true) {
-                    return d.data.data.name 
-                }
-            })
-            .style('fill', (d: any) => {
-                return `#000FFF`
-            })
+            .text((d: any) => d.data.data.husband === true ? d.data.data.name : null)
+            .style('fill', (d: any) => `#000FFF`)
     }, [graph, data]);
-
-
 
     return (
         <div className='container'>
