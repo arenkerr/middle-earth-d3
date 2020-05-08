@@ -1,10 +1,9 @@
-let nodeLocation = {};
 
-export default function buildTable(root) {
+export default function buildTable(root, nodeLocation = {}) {
     root.children.forEach(node => {
         nodeLocation[node.data.id] = {x: node.x, y: node.y}
         if (node.children) {
-            return buildTable(node)
+            return buildTable(node, nodeLocation)
         } 
     });
 
