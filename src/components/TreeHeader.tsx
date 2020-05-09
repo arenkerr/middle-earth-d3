@@ -1,11 +1,15 @@
 import React from 'react';
+import Typography from '@material-ui/core/Typography';
 
 const TreeHeader = ({ copy }) => {
     console.log(copy);
 
-    return (<div>
-        <h1>{copy.title}</h1>
-    </div>)
+    return (
+        <div>
+            <Typography variant="h1">{copy.title}</Typography>
+            <p>{copy.desc}</p>
+        </div>
+    );
 }
 
 export default TreeHeader;

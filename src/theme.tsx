@@ -3,10 +3,17 @@ import purple from '@material-ui/core/colors/purple';
 import green from '@material-ui/core/colors/green';
 
 const theme = createMuiTheme({
-  palette: {
-    primary: purple,
-    secondary: green,
-  },
+    typography: {
+        fontFamily: ['Lora', 'serif'].join(','),
+        h1: {
+            fontFamily: 'Cormorant Unicase',
+            fontSize: "3rem",
+        },
+    },
+    palette: {
+        primary: purple,
+        secondary: green,
+    },
 });
 
 export default theme;
