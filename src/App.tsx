@@ -1,15 +1,18 @@
 import React from 'react';
-import './App.css';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { ThemeProvider } from '@material-ui/core/styles';
+import { Routes } from './Routes';
 import theme from './theme';
-import Home from './components/Home';
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
-          <Home />
+      <Router>
+        <Routes />
+      </Router> 
     </ThemeProvider>
   );
 }
 
 export default App;
+
