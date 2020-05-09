@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import * as d3 from 'd3'; 
 import buildHeirarchy from '../util/buildHeirarchy';
 import buildTable from '../util/buildTable';
+import scrollIntoView from 'scroll-into-view';
 
 function Chart({ treeData, size }) {
     // format data for use with D3
@@ -52,24 +53,26 @@ function Chart({ treeData, size }) {
             .attr('stroke', '#ccc');
 
         // paths from person to spouse
-        const spousePath = svgElement.selectAll('g')
+        const getLength = path => path.getTotalLength();
+
+        svgElement.selectAll('spouse-path')
             .data(root.descendants().slice(1))
             .enter()
             .append('path')
             .attr('d', (d: any) => {
                 if (d.parent.data.id !== '0' && d.data.data.husband === true) {
-                    return 'M' + nodeLocation[d.data.data.spouseId].y + ',' + nodeLocation[d.data.data.spouseId].x
-                    + 'C' + (d.y + 300) + ',' + d.x
-                    + ' ' + (d.y) + ',' + d.x 
-                    + ' ' + d.y + ',' + d.x;
+                    return (
+                        `M ${nodeLocation[d.data.data.spouseId].y}, 
+                        ${nodeLocation[d.data.data.spouseId].x}
+                        C ${d.y + 300}, ${d.x} ${d.y}, ${d.x} ${d.y}, ${d.x}`
+                    );
                 }
                 return null;
             })
+            .attr("stroke-dasharray", function() { return `${getLength(this)} ${getLength(this)}` })
+            .attr('stroke-dashoffset', function() { return -getLength(this) })
             .style('fill', 'none')
-            .style('stroke-dasharray', ('20, 10'))
-            .style('opacity', 0.05)
             .attr('stroke', '#000FFF')
-            .attr('class', 'path-spouse')
             .attr('id', (d: any) => d.data.data.id);
 
         // add circles for nodes
@@ -78,15 +81,25 @@ function Chart({ treeData, size }) {
             .enter()
             .append('g')
             .attr('transform', (d: any) => spouseCheck(d, 'translate(' + d.y + ',' + d.x + ')'))
-            .attr('class', 'child')
-                .append('circle')
-                    .attr('r', (d: any) => spouseCheck(d, 6))
-                    .style('fill', '#ccc')
-                    .on('click', (d: any, i, n) => {
-                        const path: any = document.getElementById(d.data.data.id)
-                        path.setAttribute('style', 'opacity: 1');
-                        spousePath.style('fill', 'none');
-                    });
+            .attr('id', (d: any) => `node${d.data.data.id}`)
+            .append('circle')
+                .attr('r', (d: any) => spouseCheck(d, 6))
+                .style('fill', '#ccc')
+                .on('click', (d: any, i, n) => {
+                    let path = d3.select(`[id="${d.data.data.id}"]`);
+                    path.transition()
+                        .duration(2000)
+                        .attr("stroke-dashoffset", 0)
+                    
+                    let nameLabel = d3.select(`[id="name${d.data.data.id}"]`);
+                    nameLabel.transition()
+                        .duration(2500)
+                        .style('opacity', 1);
+
+                    let spouseNode = document.getElementById(`node${d.data.data.spouseId}`);
+                    // spouseNode?.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
+                    scrollIntoView(spouseNode, { time: 3500 });
+                });
         
         // add text elements for name labels
         svgElement.selectAll('child')
@@ -112,8 +125,10 @@ function Chart({ treeData, size }) {
             })
             .text((d: any) => d.data.data.husband === true ? d.data.data.name : null)
             .attr('font-size', '12px')
-            .style('opacity', '0.25')
+            .style('opacity', '0.15')
             .style('fill', '#000FFF')
+            .attr('id', (d: any) => `name${d.data.data.id}`);
+
     }, [graph, data, size.height, size.width]);
 
     return (
