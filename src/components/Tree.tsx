@@ -1,20 +1,18 @@
 import React, { useRef, useEffect } from 'react';
 import * as d3 from 'd3'; 
-import hobbits from '../data/hobbits.js';
-import elves from '../data/elves.js';
 import buildHeirarchy from '../util/buildHeirarchy';
 import buildTable from '../util/buildTable';
 
-function Chart() {
+function Chart({ treeData, size }) {
     // format data for use with D3
-    const data = buildHeirarchy(elves);
+    const data = buildHeirarchy(treeData);
     const graph = useRef() as React.MutableRefObject<SVGSVGElement>;
 
     // console.log(data);
 
     useEffect(() => {
-        const height = 4000;
-        const width = 1000;
+        const height = size.height;
+        const width = size.width;
         const margin = { top: 40, right: 40, bottom: 40, left: 40 }
         const svgElement = d3.select(graph.current);
 
@@ -96,9 +94,10 @@ function Chart() {
             .enter()
             .append('text')
                 .attr('transform', (d: any) => {
-                    return `translate(${d.y - 25},${d.x + 25})`
+                    return `translate(${d.y - 20},${d.x + 20})`
                 })
                 .text((d: any) => spouseCheck(d, d.data.data.name ))
+                .attr('font-size', '12px')
                 .style('fill', '#000000');
 
         // add husbands' name next to wife
@@ -108,16 +107,17 @@ function Chart() {
             .append('text')
             .attr('transform', (d: any) => {
                 return d.data.data.husband === true 
-                    ? `translate(${nodeLocation[d.data.data.spouseId].y - 25},${nodeLocation[d.data.data.spouseId].x - 15})` 
+                    ? `translate(${nodeLocation[d.data.data.spouseId].y - 20},${nodeLocation[d.data.data.spouseId].x - 10})` 
                     : null
             })
             .text((d: any) => d.data.data.husband === true ? d.data.data.name : null)
-            .style('fill', (d: any) => `#000FFF`)
-    }, [graph, data]);
+            .attr('font-size', '12px')
+            .style('opacity', '0.25')
+            .style('fill', '#000FFF')
+    }, [graph, data, size.height, size.width]);
 
     return (
-        <div className='container'>
-            <h1>Chart</h1>
+        <div className="tree-container">
             <svg ref={graph} />
         </div>
     );

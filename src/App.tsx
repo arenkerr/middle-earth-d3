@@ -1,12 +1,14 @@
 import React from 'react';
 import './App.css';
-import Chart from './components/Chart';
+import { ThemeProvider } from '@material-ui/core/styles';
+import theme from './theme';
+import Home from './components/Home';
 
 function App() {
   return (
-    <div>
-      <Chart />
-    </div>
+    <ThemeProvider theme={theme}>
+          <Home />
+    </ThemeProvider>
   );
 }
 
