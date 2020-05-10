@@ -2,10 +2,23 @@
     font-size: 12px;
 
     &__name-label {
+
+        &--husband {
+            cursor: pointer;
+            &:hover {
+                transition: fill 1s;
+                fill: #000FFF;
+            }
+        }
     }
 
     &__spouse-label {
         fill: #000FFF;
         opacity: 0.15;
+    }
+
+    &__tooltip {
+        height: 100%;
+        width: 100%;
     }
 }

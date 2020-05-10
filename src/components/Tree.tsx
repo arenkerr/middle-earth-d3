@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import * as d3 from 'd3'; 
 import scrollIntoView from 'scroll-into-view';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import buildHeirarchy from '../util/buildHeirarchy';
 import buildTable from '../util/buildTable';
 import Person from './Person';
@@ -13,12 +14,17 @@ function Chart({ treeData, size }) {
 
     // state for displaying profile
     const [person, setPerson] = useState();
+    const [position, setPosition] = useState({});
     const [show, setShow] = useState(false);
 
     const handleClick = (node) => {
+        let coords = { x: node.x, y: node.y }
         setPerson(node.data.data);
+        setPosition(coords);
         setShow(true);
+        console.log(show)
     }
+    const handleClickAway = () => setShow(false);
 
     useEffect(() => {
         const height = size.height;
@@ -35,7 +41,6 @@ function Chart({ treeData, size }) {
 
         const root = d3.hierarchy(data, d => d.children);
         cluster(root);
-        console.log(root.children);
 
         // create a hash table of ids and coords, used for location of spouse
         let nodeLocation = buildTable(root);
@@ -95,6 +100,28 @@ function Chart({ treeData, size }) {
                 .attr('r', (d: any) => spouseCheck(d, 6))
                 .attr('cursor', 'pointer')
                 .style('fill', '#ccc')
+                .on('click', (d: any) => handleClick(d));
+        
+        // add text elements for name labels
+        svgElement.selectAll('tree__name-label')
+            .data(root.descendants().slice(1))
+            .enter()
+            .append('text')
+                .attr('transform', (d: any) => {
+                    return `translate(${d.y - 20},${d.x + 20})`
+                })
+                .text((d: any) => {
+                    let name = d.data.data.name;
+                    if (d.data.data.husband === true) {
+                        name = `${d.data.data.name} ↟`
+                    }
+                    return spouseCheck(d, name )
+                })
+                .attr('class', (d: any) => {
+                    return d.data.data.husband === true 
+                        ? 'tree__name-label tree__name-label--husband' 
+                        : 'tree__name-label';
+                })
                 .on('click', (d: any) => {
                     let path = d3.select(`[id="${d.data.data.id}"]`);
                     path.transition()
@@ -108,20 +135,7 @@ function Chart({ treeData, size }) {
 
                     let spouseNode = document.getElementById(`node${d.data.data.spouseId}`);
                     scrollIntoView(spouseNode, { time: 3500 });
-                });
-        
-        // add text elements for name labels
-        svgElement.selectAll('name-label')
-            .data(root.descendants().slice(1))
-            .enter()
-            .append('text')
-                .attr('transform', (d: any) => {
-                    return `translate(${d.y - 20},${d.x + 20})`
                 })
-                .text((d: any) => spouseCheck(d, d.data.data.name ))
-                .attr('class', 'tree__name-label')
-                .style('cursor', 'pointer')
-                .on('click', (d: any) => handleClick(d));
 
         // add husbands' name next to wife  
         svgElement.selectAll('child')
@@ -137,15 +151,15 @@ function Chart({ treeData, size }) {
             .attr('class', 'tree__spouse-label')
             .attr('id', (d: any) => `name${d.data.data.id}`);
 
-    }, [graph, data, size.height, size.width, person]);
+    });
 
     return (
         <div className="tree-container">
-            {show 
-                ? <Person profile={person} />
-                : null 
-            }
-            <svg className="tree" ref={graph} />
+            <ClickAwayListener onClickAway={handleClickAway}>
+                <svg className="tree" ref={graph}>
+                    {show ? <Person profile={person} coords={position} /> : null}
+                </svg>
+            </ClickAwayListener>
         </div>
     );
 }
