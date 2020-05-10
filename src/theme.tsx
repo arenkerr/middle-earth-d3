@@ -9,6 +9,10 @@ const theme = createMuiTheme({
             fontFamily: 'Cormorant Unicase',
             fontSize: "3rem",
         },
+        h2: {
+            fontFamily: 'Cormorant Unicase',
+            fontSize: "2rem",
+        }
     },
     palette: {
         primary: purple,

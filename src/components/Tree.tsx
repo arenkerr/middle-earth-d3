@@ -22,7 +22,7 @@ function Chart({ treeData, size }) {
         setPerson(node.data.data);
         setPosition(coords);
         setShow(true);
-        console.log(show)
+        console.log(node)
     }
     const handleClickAway = () => setShow(false);
 
@@ -151,6 +151,7 @@ function Chart({ treeData, size }) {
             .attr('class', 'tree__spouse-label')
             .attr('id', (d: any) => `name${d.data.data.id}`);
 
+            d3.selectAll("#tooltip").raise(); 
     });
 
     return (
