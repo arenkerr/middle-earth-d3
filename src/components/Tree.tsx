@@ -1,15 +1,24 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import * as d3 from 'd3'; 
+import scrollIntoView from 'scroll-into-view';
 import buildHeirarchy from '../util/buildHeirarchy';
 import buildTable from '../util/buildTable';
-import scrollIntoView from 'scroll-into-view';
+import Person from './Person';
+import '../styles/tree.scss'
 
 function Chart({ treeData, size }) {
     // format data for use with D3
     const data = buildHeirarchy(treeData);
     const graph = useRef() as React.MutableRefObject<SVGSVGElement>;
 
-    // console.log(data);
+    // state for displaying profile
+    const [person, setPerson] = useState();
+    const [show, setShow] = useState(false);
+
+    const handleClick = (node) => {
+        setPerson(node.data.data);
+        setShow(true);
+    }
 
     useEffect(() => {
         const height = size.height;
@@ -84,8 +93,9 @@ function Chart({ treeData, size }) {
             .attr('id', (d: any) => `node${d.data.data.id}`)
             .append('circle')
                 .attr('r', (d: any) => spouseCheck(d, 6))
+                .attr('cursor', 'pointer')
                 .style('fill', '#ccc')
-                .on('click', (d: any, i, n) => {
+                .on('click', (d: any) => {
                     let path = d3.select(`[id="${d.data.data.id}"]`);
                     path.transition()
                         .duration(2000)
@@ -97,12 +107,11 @@ function Chart({ treeData, size }) {
                         .style('opacity', 1);
 
                     let spouseNode = document.getElementById(`node${d.data.data.spouseId}`);
-                    // spouseNode?.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
                     scrollIntoView(spouseNode, { time: 3500 });
                 });
         
         // add text elements for name labels
-        svgElement.selectAll('child')
+        svgElement.selectAll('name-label')
             .data(root.descendants().slice(1))
             .enter()
             .append('text')
@@ -110,10 +119,11 @@ function Chart({ treeData, size }) {
                     return `translate(${d.y - 20},${d.x + 20})`
                 })
                 .text((d: any) => spouseCheck(d, d.data.data.name ))
-                .attr('font-size', '12px')
-                .style('fill', '#000000');
+                .attr('class', 'tree__name-label')
+                .style('cursor', 'pointer')
+                .on('click', (d: any) => handleClick(d));
 
-        // add husbands' name next to wife
+        // add husbands' name next to wife  
         svgElement.selectAll('child')
             .data(root.descendants().slice(1))
             .enter()
@@ -124,16 +134,18 @@ function Chart({ treeData, size }) {
                     : null
             })
             .text((d: any) => d.data.data.husband === true ? d.data.data.name : null)
-            .attr('font-size', '12px')
-            .style('opacity', '0.15')
-            .style('fill', '#000FFF')
+            .attr('class', 'tree__spouse-label')
             .attr('id', (d: any) => `name${d.data.data.id}`);
 
-    }, [graph, data, size.height, size.width]);
+    }, [graph, data, size.height, size.width, person]);
 
     return (
         <div className="tree-container">
-            <svg ref={graph} />
+            {show 
+                ? <Person profile={person} />
+                : null 
+            }
+            <svg className="tree" ref={graph} />
         </div>
     );
 }
