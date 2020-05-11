@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import * as d3 from 'd3'; 
 import scrollIntoView from 'scroll-into-view';
+import Container from '@material-ui/core/Container';
 import buildHeirarchy from '../util/buildHeirarchy';
 import buildTable from '../util/buildTable';
 import Person from './Person';
@@ -161,11 +162,11 @@ function Chart({ treeData, size }) {
     });
 
     return (
-        <div className="tree-container">
+        <Container className="tree-container">
                 <svg className="tree" ref={graph}>
                     {show && <Person profile={person} coords={position} />}
                 </svg>
-        </div>
+        </Container>
     );
 }
 

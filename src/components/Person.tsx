@@ -1,17 +1,27 @@
 import React from 'react';
+import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import '../styles/person.scss'
+import Paper from '@material-ui/core/Paper';
+import theme from '../theme';
 
-const Person = ({ profile, coords }) => (
-    <foreignObject x={coords.y - 300} y={coords.x} width={400} height={560} id="tooltip">
-        <div className="person">
-            <Typography variant="h2">{profile.name}</Typography>
-            <ul className="person__info">
-                {profile.profile.dob && <li>b. {profile.profile.dob}</li>}
-                {profile.profile.dod && <li>&nbsp;| d. {profile.profile.dod}</li>}
-            </ul>
-        </div>
-    </foreignObject>
-)
+const Person = ({ profile, coords }) => {
+    const ProfilePaper = withStyles({
+        root: {
+          background: theme.palette.primary.main,
+          padding: '1em'
+        }
+      })(Paper);
+
+    return (
+        <foreignObject x={coords.y - 300} y={coords.x} width={374} height={86} id="tooltip">
+            <ProfilePaper variant="outlined" elevation={3} square>
+                <Typography variant="h2">{profile.name}</Typography>
+                    {profile.profile.dob && <span>b.{profile.profile.dob}</span>}
+                    {profile.profile.dob && profile.profile.dod ? <span> | </span> : null}
+                    {profile.profile.dod && <span>d. {profile.profile.dod}</span>}
+            </ProfilePaper>
+        </foreignObject>
+   )
+}
 
 export default Person;

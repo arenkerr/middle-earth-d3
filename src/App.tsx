@@ -4,6 +4,7 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { Routes } from './Routes';
 import theme from './theme';
+import './styles/global.scss'
 
 function App() {
   return (
