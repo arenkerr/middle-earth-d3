@@ -8,7 +8,7 @@ const Person = ({ profile, coords }) => (
             <Typography variant="h2">{profile.name}</Typography>
             <ul className="person__info">
                 {profile.profile.dob && <li>b. {profile.profile.dob}</li>}
-                {profile.profile.dob && <li>&nbsp;| d. {profile.profile.dod}</li>}
+                {profile.profile.dod && <li>&nbsp;| d. {profile.profile.dod}</li>}
             </ul>
         </div>
     </foreignObject>

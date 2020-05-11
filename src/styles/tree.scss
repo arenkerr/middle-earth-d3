@@ -1,20 +1,31 @@
 .tree {
     font-size: 12px;
 
+    &__node {
+        cursor: pointer;
+        transition: fill 1s;
+        fill: #ccc;
+
+        &:hover {
+            fill:  #000FFF;
+        }
+    }
+
     &__name-label {
 
         &--husband {
             cursor: pointer;
             &:hover {
-                transition: fill 1s;
                 fill: #000FFF;
+                transition: fill 1s;
             }
         }
     }
 
     &__spouse-label {
         fill: #000FFF;
-        opacity: 0.15;
+        opacity: 0.25;
+        font-style: italic;
     }
 
     &__tooltip {

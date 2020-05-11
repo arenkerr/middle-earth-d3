@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import * as d3 from 'd3'; 
 import scrollIntoView from 'scroll-into-view';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import buildHeirarchy from '../util/buildHeirarchy';
 import buildTable from '../util/buildTable';
 import Person from './Person';
@@ -22,10 +21,15 @@ function Chart({ treeData, size }) {
         setPerson(node.data.data);
         setPosition(coords);
         setShow(true);
-        console.log(node)
     }
-    const handleClickAway = () => setShow(false);
-
+    
+    // handle click off
+    d3.select('body').on('click', () => {
+        if (d3.event.path[0].classList.contains('tree__node') === false) {
+            setShow(false)
+        }
+    });
+  
     useEffect(() => {
         const height = size.height;
         const width = size.width;
@@ -34,7 +38,7 @@ function Chart({ treeData, size }) {
 
         svgElement
             .attr('height', height + margin.top + margin.bottom)
-            .attr('width', width + margin.left + margin.right)
+            .attr('width', width + margin.left + margin.right);
 
         const cluster = d3.cluster()
             .size([height - margin.top - margin.bottom, width - margin.left - margin.right]);
@@ -69,7 +73,7 @@ function Chart({ treeData, size }) {
         // paths from person to spouse
         const getLength = path => path.getTotalLength();
 
-        svgElement.selectAll('spouse-path')
+        svgElement.selectAll()
             .data(root.descendants().slice(1))
             .enter()
             .append('path')
@@ -98,12 +102,11 @@ function Chart({ treeData, size }) {
             .attr('id', (d: any) => `node${d.data.data.id}`)
             .append('circle')
                 .attr('r', (d: any) => spouseCheck(d, 6))
-                .attr('cursor', 'pointer')
-                .style('fill', '#ccc')
+                .attr('class', 'tree__node')
                 .on('click', (d: any) => handleClick(d));
         
         // add text elements for name labels
-        svgElement.selectAll('tree__name-label')
+        svgElement.selectAll('text')
             .data(root.descendants().slice(1))
             .enter()
             .append('text')
@@ -123,22 +126,25 @@ function Chart({ treeData, size }) {
                         : 'tree__name-label';
                 })
                 .on('click', (d: any) => {
-                    let path = d3.select(`[id="${d.data.data.id}"]`);
-                    path.transition()
-                        .duration(2000)
-                        .attr("stroke-dashoffset", 0)
-                    
-                    let nameLabel = d3.select(`[id="name${d.data.data.id}"]`);
-                    nameLabel.transition()
-                        .duration(2500)
-                        .style('opacity', 1);
+                    if (d.data.data.husband === true) {
+                        let path = d3.select(`[id="${d.data.data.id}"]`);
+                        path.transition()
+                            .duration(2000)
+                            .attr("stroke-dashoffset", 0)
+                        
+                        let nameLabel = d3.select(`[id="name${d.data.data.id}"]`);
+                        nameLabel.transition()
+                            .duration(2500)
+                            .style('opacity', 1);
 
-                    let spouseNode = document.getElementById(`node${d.data.data.spouseId}`);
-                    scrollIntoView(spouseNode, { time: 3500 });
+                        let spouseNode = document.getElementById(`node${d.data.data.spouseId}`);
+                        scrollIntoView(spouseNode, { time: 3500 });
+                    }
                 })
+                svgElement.exit().remove();
 
         // add husbands' name next to wife  
-        svgElement.selectAll('child')
+        svgElement.selectAll('.tree__spouse-label')
             .data(root.descendants().slice(1))
             .enter()
             .append('text')
@@ -151,16 +157,14 @@ function Chart({ treeData, size }) {
             .attr('class', 'tree__spouse-label')
             .attr('id', (d: any) => `name${d.data.data.id}`);
 
-            d3.selectAll("#tooltip").raise(); 
+        svgElement.select("#tooltip").raise(); 
     });
 
     return (
         <div className="tree-container">
-            <ClickAwayListener onClickAway={handleClickAway}>
                 <svg className="tree" ref={graph}>
-                    {show ? <Person profile={person} coords={position} /> : null}
+                    {show && <Person profile={person} coords={position} />}
                 </svg>
-            </ClickAwayListener>
         </div>
     );
 }
