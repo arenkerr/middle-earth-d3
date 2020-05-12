@@ -72,7 +72,7 @@ function Chart({ treeData, size, translate }) {
             .data(root.descendants().slice(1))
             .enter()
             .append('g')
-            .attr('transform', `translate(0, ${translate})`)  
+            .attr('transform', `translate(-150, ${translate})`)  
             .append('path')
             .attr('d', (d: any) => {
                 if (d.parent.data.id !== '0') {
@@ -94,7 +94,7 @@ function Chart({ treeData, size, translate }) {
             .data(root.descendants().slice(1))
             .enter()
             .append('g')
-            .attr('transform', `translate(0, ${translate})`)  
+            .attr('transform', `translate(-150, ${translate})`)  
             .append('path')
             .attr('d', (d: any) => {
                 if (d.parent.data.id !== '0' && d.data.data.husband === true) {
@@ -117,7 +117,7 @@ function Chart({ treeData, size, translate }) {
             .data(root.descendants().slice(1))
             .enter()
             .append('g')
-            .attr('transform', `translate(0, ${translate})`)  
+            .attr('transform', `translate(-150, ${translate})`)  
             .append('g')
             .attr('transform', (d: any) => spouseCheck(d, 'translate(' + d.y + ',' + d.x + ')'))
             .append('circle')
@@ -133,7 +133,7 @@ function Chart({ treeData, size, translate }) {
             .data(root.descendants().slice(1))
             .enter()
             .append('g')
-            .attr('transform', `translate(0, ${translate})`)  
+            .attr('transform', `translate(-150, ${translate})`)  
             .append('text')
                 .attr('transform', (d: any) => {
                     return `translate(${d.y - 20},${d.x + 20})`
@@ -172,7 +172,7 @@ function Chart({ treeData, size, translate }) {
             .data(root.descendants().slice(1))
             .enter()
             .append('g')
-            .attr('transform', `translate(0, ${translate})`)  
+            .attr('transform', `translate(-150, ${translate})`)  
             .append('text')
             .attr('transform', (d: any) => {
                 return d.data.data.husband === true 
@@ -184,7 +184,7 @@ function Chart({ treeData, size, translate }) {
             .attr('id', (d: any) => `name${d.data.data.id}`)
 
             svgElement.select("#tooltip")
-                .attr('transform', `translate(0, ${translate})`)
+                .attr('transform', `translate(-150, ${translate})`)
                 .raise(); 
 
     });
