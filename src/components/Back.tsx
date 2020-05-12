@@ -1,12 +1,12 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import IconButton from '@material-ui/core/IconButton';
+import { BackButton } from '../theme/main';
 
 const Back = ({ history }) => (
-    <IconButton onClick={() => history.goBack()}>
+    <BackButton onClick={() => history.goBack()}>
         <ArrowBackIcon fontSize="large" color="primary"/>
-    </IconButton>
+    </BackButton>
 )
 
 export default withRouter(Back);

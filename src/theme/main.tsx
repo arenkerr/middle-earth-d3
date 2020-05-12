@@ -1,6 +1,6 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 import { withStyles } from '@material-ui/core/styles';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import IconButton from '@material-ui/core/IconButton';
 
 const theme = createMuiTheme({
     typography: {
@@ -26,18 +26,6 @@ const theme = createMuiTheme({
         },
     },
     overrides: {
-        MuiIconButton: {
-            root: {
-                backgroundColor: '#912400',
-                position: 'fixed',
-                bottom: '0',
-                margin: '0.5em',
-                transition: 'background 1s',
-                '&:hover': {
-                    backgroundColor: '#3b0f01',
-                }
-            }
-        },
         MuiExpansionPanel: {
             root: {
                 color: '#0a102e',
@@ -51,14 +39,20 @@ const theme = createMuiTheme({
     }
 });
 
-// const Expander = withStyles({
-//     root: {
-//         background: '#fdf2e1',
-//         margin: '1em',
-//         padding: '0.5em',
-//         position: 'fixed',
-//         maxWidth: '460px'
-//     }
-//   })(ExpansionPanel);
+const BackButton = withStyles({
+    root: {
+        backgroundColor: '#912400',
+        position: 'fixed',
+        bottom: '0',
+        margin: '0.5em',
+        transition: 'background 1s',
+        '&:hover': {
+            backgroundColor: '#3b0f01',
+        }
+    }
+})(IconButton);
 
-export default theme;
+export { 
+    theme, 
+    BackButton, 
+};
