@@ -8,7 +8,8 @@ const Person = ({ profile, coords }) => {
     const ProfilePaper = withStyles({
         root: {
           background: theme.palette.primary.main,
-          padding: '1em'
+          padding: '1em',
+          boxShadow: '0px 0px 3px 1px rgba(0,0,0,0.25)',
         }
       })(Paper);
 

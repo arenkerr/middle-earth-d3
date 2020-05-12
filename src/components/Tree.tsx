@@ -7,7 +7,7 @@ import buildTable from '../util/buildTable';
 import Person from './Person';
 import '../styles/tree.scss'
 
-function Chart({ treeData, size }) {
+function Chart({ treeData, size, translate }) {
     // format data for use with D3
     const data = buildHeirarchy(treeData);
     const graph = useRef() as React.MutableRefObject<SVGSVGElement>;
@@ -17,16 +17,31 @@ function Chart({ treeData, size }) {
     const [position, setPosition] = useState({});
     const [show, setShow] = useState(false);
 
+    // clicks and mouseover
     const handleClick = (node) => {
         let coords = { x: node.x, y: node.y }
         setPerson(node.data.data);
         setPosition(coords);
         setShow(true);
     }
+
+    const mouseOver = (id) => {
+        console.log(d3.select(`[id="${id}"]`));
+        return d3.select(`[id="${id}"]`)
+                .transition()
+                .duration(1500)
+                .attr('r', 7);
+    }
     
-    // handle click off
+    const mouseOut = (id) => {
+        return d3.select(`[id="${id}"]`)
+        .transition()
+        .duration(1500)
+        .attr('r', 5);
+    }
+
     d3.select('body').on('click', () => {
-        if (d3.event.path[0].classList.contains('tree__node') === false) {
+        if (d3.event.path && d3.event.path[0].classList.contains('tree__node') === false) {
             setShow(false)
         }
     });
@@ -34,15 +49,14 @@ function Chart({ treeData, size }) {
     useEffect(() => {
         const height = size.height;
         const width = size.width;
-        const margin = { top: 40, right: 40, bottom: 40, left: 40 }
         const svgElement = d3.select(graph.current);
 
         svgElement
-            .attr('height', height + margin.top + margin.bottom)
-            .attr('width', width + margin.left + margin.right);
+            .attr('height', height)
+            .attr('width', width)        
 
         const cluster = d3.cluster()
-            .size([height - margin.top - margin.bottom, width - margin.left - margin.right]);
+            .nodeSize([44, 180])
 
         const root = d3.hierarchy(data, d => d.children);
         cluster(root);
@@ -57,6 +71,8 @@ function Chart({ treeData, size }) {
         svgElement.selectAll('path')
             .data(root.descendants().slice(1))
             .enter()
+            .append('g')
+            .attr('transform', `translate(0, ${translate})`)  
             .append('path')
             .attr('d', (d: any) => {
                 if (d.parent.data.id !== '0') {
@@ -69,7 +85,7 @@ function Chart({ treeData, size }) {
                 return null;
             })
             .style('fill', 'none')
-            .attr('stroke', '#ccc');
+            .attr('class', 'tree__path')
 
         // paths from person to spouse
         const getLength = path => path.getTotalLength();
@@ -77,6 +93,8 @@ function Chart({ treeData, size }) {
         svgElement.selectAll()
             .data(root.descendants().slice(1))
             .enter()
+            .append('g')
+            .attr('transform', `translate(0, ${translate})`)  
             .append('path')
             .attr('d', (d: any) => {
                 if (d.parent.data.id !== '0' && d.data.data.husband === true) {
@@ -91,25 +109,31 @@ function Chart({ treeData, size }) {
             .attr("stroke-dasharray", function() { return `${getLength(this)} ${getLength(this)}` })
             .attr('stroke-dashoffset', function() { return -getLength(this) })
             .style('fill', 'none')
-            .attr('stroke', '#000FFF')
+            .attr('class', 'tree__spouse-path')
             .attr('id', (d: any) => d.data.data.id);
 
         // add circles for nodes
-        svgElement.selectAll('g')
+        svgElement.selectAll('tree__node')
             .data(root.descendants().slice(1))
             .enter()
             .append('g')
+            .attr('transform', `translate(0, ${translate})`)  
+            .append('g')
             .attr('transform', (d: any) => spouseCheck(d, 'translate(' + d.y + ',' + d.x + ')'))
-            .attr('id', (d: any) => `node${d.data.data.id}`)
             .append('circle')
-                .attr('r', (d: any) => spouseCheck(d, 6))
+                .attr('id', (d: any) => `node${d.data.data.id}`)
+                .attr('r', (d: any) => spouseCheck(d, 5))
                 .attr('class', 'tree__node')
-                .on('click', (d: any) => handleClick(d));
+                .on('click', (d: any) => handleClick(d))
+                .on('mouseover', (d: any) => mouseOver(`node${d.data.data.id}`))
+                .on('mouseout', (d: any) => mouseOut(`node${d.data.data.id}`));
         
         // add text elements for name labels
         svgElement.selectAll('text')
             .data(root.descendants().slice(1))
             .enter()
+            .append('g')
+            .attr('transform', `translate(0, ${translate})`)  
             .append('text')
                 .attr('transform', (d: any) => {
                     return `translate(${d.y - 20},${d.x + 20})`
@@ -142,12 +166,13 @@ function Chart({ treeData, size }) {
                         scrollIntoView(spouseNode, { time: 3500 });
                     }
                 })
-                svgElement.exit().remove();
 
         // add husbands' name next to wife  
         svgElement.selectAll('.tree__spouse-label')
             .data(root.descendants().slice(1))
             .enter()
+            .append('g')
+            .attr('transform', `translate(0, ${translate})`)  
             .append('text')
             .attr('transform', (d: any) => {
                 return d.data.data.husband === true 
@@ -156,9 +181,12 @@ function Chart({ treeData, size }) {
             })
             .text((d: any) => d.data.data.husband === true ? d.data.data.name : null)
             .attr('class', 'tree__spouse-label')
-            .attr('id', (d: any) => `name${d.data.data.id}`);
+            .attr('id', (d: any) => `name${d.data.data.id}`)
 
-        svgElement.select("#tooltip").raise(); 
+            svgElement.select("#tooltip")
+                .attr('transform', `translate(0, ${translate})`)
+                .raise(); 
+
     });
 
     return (
