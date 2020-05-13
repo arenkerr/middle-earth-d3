@@ -16,11 +16,11 @@ const Legend = () => (
     <LegendExpander elevation={0}>
         <LegendExpanderSummary>
             <IconButton>
-                <Icon path={mdiCompassRose} size={3} />
+                <Icon path={mdiCompassRose} size={3} className="legend__icon"/>
             </IconButton>
         </LegendExpanderSummary>
         <LegendExpanderDetails>
-            <p><Typography variant="h2">Legend</Typography></p>
+            <Typography variant="h2">Legend</Typography>
             <TableContainer>
                 <Table size="small">
                     <TableBody>

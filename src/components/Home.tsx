@@ -10,6 +10,8 @@ const Home = () => {
             <ul>
                 <li><Link to="/elves">Elves</Link></li>
                 <li><Link to="/hobbits">Hobbits</Link></li>
+                <li><Link to="/dwarves">Dwarves</Link></li>
+                <li><Link to="/all">All</Link></li>
             </ul>
         </Container>
     )

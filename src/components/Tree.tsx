@@ -7,7 +7,7 @@ import buildTable from '../util/buildTable';
 import Person from './Person';
 import '../styles/tree.scss'
 
-function Chart({ treeData, size, translate }) {
+function Chart({ treeData, size, translate, scrollTo = '' }) {
     // format data for use with D3
     const data = buildHeirarchy(treeData);
     const graph = useRef() as React.MutableRefObject<SVGSVGElement>;
@@ -17,7 +17,7 @@ function Chart({ treeData, size, translate }) {
     const [position, setPosition] = useState({});
     const [show, setShow] = useState(false);
 
-    // clicks and mouseover
+    // handle click and hover on nodes
     const handleClick = (node) => {
         let coords = { x: node.x, y: node.y }
         setPerson(node.data.data);
@@ -25,8 +25,13 @@ function Chart({ treeData, size, translate }) {
         setShow(true);
     }
 
+    d3.select('body').on('click', () => {
+        if (d3.event.path && d3.event.path[0].classList.contains('tree__node') === false) {
+            setShow(false)
+        }
+    });
+
     const mouseOver = (id) => {
-        console.log(d3.select(`[id="${id}"]`));
         return d3.select(`[id="${id}"]`)
                 .transition()
                 .duration(1500)
@@ -39,12 +44,6 @@ function Chart({ treeData, size, translate }) {
         .duration(1500)
         .attr('r', 5);
     }
-
-    d3.select('body').on('click', () => {
-        if (d3.event.path && d3.event.path[0].classList.contains('tree__node') === false) {
-            setShow(false)
-        }
-    });
   
     useEffect(() => {
         const height = size.height;
@@ -187,6 +186,9 @@ function Chart({ treeData, size, translate }) {
                 .attr('transform', `translate(-150, ${translate})`)
                 .raise(); 
 
+        // if scrollTo is provided in props, scroll there:
+        const startPos = document.getElementById(scrollTo);
+        startPos && scrollIntoView(startPos);
     });
 
     return (
