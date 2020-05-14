@@ -84,6 +84,7 @@ function Chart({ treeData, size, translate, scrollTo = '' }) {
                 return null;
             })
             .style('fill', 'none')
+            .style('stroke-width', '2')
             .attr('class', 'tree__path')
 
         // paths from person to spouse

@@ -2669,7 +2669,6 @@ const hobbits =
     1 WIFE @Ie58080b474@
     0 @SUBM@ SUBM
     1 NAME root
-    0 TRLR
-    `
+    0 TRLR`;
 
 export default hobbits;

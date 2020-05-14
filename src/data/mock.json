@@ -11,6 +11,14 @@
         "title": "Dwarves",
         "desc": "The Dwarves were made by Aulë, whom they themselves called Mahal, meaning “maker.” Aulë was unwilling to wait for the coming of the Children of Ilúvatar, for he was impatient and desired to have someone to teach his lore and crafts. Therefore, he made the first Seven Fathers of the Dwarves in secret in a hall under the mountains of Middle-earth."
     },
+    "menAtanatari": {
+        "title": "Atanatari",
+        "desc": "Men of the first age."
+    },
+    "menAtani": {
+        "title": "Atani",
+        "desc": "Men of the second and third ages."
+    },
     "all": {
         "title": "All",
         "desc": "The children of Eru Illuvatar"
