@@ -5,7 +5,8 @@ import Container from '@material-ui/core/Container';
 import buildHeirarchy from '../util/buildHeirarchy';
 import buildTable from '../util/buildTable';
 import Person from './Person';
-import '../styles/tree.scss'
+import Profile from './Profile';
+import '../styles/tree.scss';
 
 function Chart({ treeData, size, translate, scrollTo = '' }) {
     // format data for use with D3
@@ -194,9 +195,8 @@ function Chart({ treeData, size, translate, scrollTo = '' }) {
 
     return (
         <Container className="tree-container">
-                <svg className="tree" ref={graph}>
-                    {show && <Person profile={person} coords={position} />}
-                </svg>
+            {show && <Profile profile={person} open={show} />}
+            <svg className="tree" ref={graph} />
         </Container>
     );
 }
