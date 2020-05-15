@@ -1,6 +1,7 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
+import Paper from '@material-ui/core/Paper';
 
 const theme = createMuiTheme({
     typography: {
@@ -52,7 +53,16 @@ const BackButton = withStyles({
     }
 })(IconButton);
 
+const ProfilePaper = withStyles({
+    root: {
+      background: theme.palette.primary.main,
+      padding: '1em',
+      outline: 'none'
+    }
+  })(Paper);
+
 export { 
     theme, 
     BackButton, 
+    ProfilePaper
 };

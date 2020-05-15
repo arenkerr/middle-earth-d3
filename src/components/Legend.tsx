@@ -30,7 +30,7 @@ const Legend = () => (
                         </TableRow>
                         <TableRow>
                             <TableCell align="left"><span className="legend__husband">↟</span></TableCell>
-                            <TableCell align="right">Husband (click to show family)</TableCell>
+                            <TableCell align="right">Husband - click to show family</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>

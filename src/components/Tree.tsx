@@ -4,7 +4,6 @@ import scrollIntoView from 'scroll-into-view';
 import Container from '@material-ui/core/Container';
 import buildHeirarchy from '../util/buildHeirarchy';
 import buildTable from '../util/buildTable';
-import Person from './Person';
 import Profile from './Profile';
 import '../styles/tree.scss';
 
