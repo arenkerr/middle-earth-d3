@@ -1,12 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
+import { CenteredContainer } from '../theme/main';
+import HomeAnimation from './HomeAnimation';
 
 const Home = () => {
     return ( 
-        <Container>
+        <CenteredContainer>
             <Typography variant="h1">Middle-Earth Trees</Typography>
+            <HomeAnimation />
             <ul>
                 <li><Link to="/elves">Elves</Link></li>
                 <li><Link to="/hobbits">Hobbits</Link></li>
@@ -15,7 +17,7 @@ const Home = () => {
                 <li><Link to="/men/atani">Men of the Second and Third Age</Link></li>
                 <li><Link to="/all">All</Link></li>
             </ul>
-        </Container>
+        </CenteredContainer>
     )
 }
 

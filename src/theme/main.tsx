@@ -2,6 +2,7 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import Paper from '@material-ui/core/Paper';
+import Container from '@material-ui/core/Container';
 
 const theme = createMuiTheme({
     typography: {
@@ -61,8 +62,17 @@ const ProfilePaper = withStyles({
     }
   })(Paper);
 
+const CenteredContainer = withStyles({
+    root: {
+        display: 'flex',
+        flexFlow: 'column',
+        alignItems: 'center'
+    }
+})(Container);
+
 export { 
     theme, 
     BackButton, 
-    ProfilePaper
+    ProfilePaper,
+    CenteredContainer
 };
