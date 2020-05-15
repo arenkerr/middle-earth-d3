@@ -14,14 +14,15 @@ function Chart({ treeData, size, translate, scrollTo = '' }) {
 
     // state for displaying profile
     const [person, setPerson] = useState();
-    const [position, setPosition] = useState({});
     const [show, setShow] = useState(false);
+
+    // state for setting initial scroll pos
+    // prevents scrolling on subsequent renders
+    const [scroll, setScroll] = useState(true);
 
     // handle click and hover on nodes
     const handleClick = (node) => {
-        let coords = { x: node.x, y: node.y }
         setPerson(node.data.data);
-        setPosition(coords);
         setShow(true);
     }
 
@@ -187,9 +188,12 @@ function Chart({ treeData, size, translate, scrollTo = '' }) {
                 .attr('transform', `translate(-150, ${translate})`)
                 .raise(); 
 
-        // if scrollTo is provided in props, scroll there:
+        // if scrollTo is provided in props, scroll there on the initial render:
         const startPos = document.getElementById(scrollTo);
-        startPos && scrollIntoView(startPos);
+        if (startPos && scroll) {
+            scrollIntoView(startPos);
+            setScroll(false);
+        };
     });
 
     return (

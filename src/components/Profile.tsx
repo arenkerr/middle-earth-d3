@@ -1,5 +1,4 @@
 import React from 'react';
-import { useQuery } from '@apollo/react-hooks';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import Modal from '@material-ui/core/Modal';
@@ -41,7 +40,8 @@ const Profile = ({ profile, open }) => {
                             <p>{data.getPerson ? data.getPerson.bio : <em>No biography available.</em>}</p>
                         </ProfilePaper>
                     </Modal>
-                )}
+                )
+            }
             )}
         </Query>
     );
