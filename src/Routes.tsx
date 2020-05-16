@@ -7,6 +7,7 @@ import Dwarves from './components/Dwarves';
 import MenAtanatari from './components/MenAtanatari';
 import MenAtani from './components/MenAtani';
 import All from './components/All';
+import About from './components/About';
 
 export const Routes = () => {
     return (
@@ -18,6 +19,7 @@ export const Routes = () => {
             <Route exact path="/men/atanatari" component={MenAtanatari} />
             <Route exact path="/men/atani" component={MenAtani} />
             <Route exact path="/all" component={All} />
+            <Route exact path="/about" component={About} />
             <Route component={Home} />
         </Switch>
     );
