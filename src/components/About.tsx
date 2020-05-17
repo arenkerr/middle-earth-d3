@@ -8,7 +8,7 @@ const About = () => {
         <React.Fragment>
             <CenteredContainer>
                 <Typography variant="h1">Credits</Typography>
-                <a href="https://github.com/RobSis/middle-earth-genealogy-project" target="_blank">
+                <a href="https://github.com/RobSis/middle-earth-genealogy-project" target="_blank" rel="noopener noreferrer">
                     Middle-Earth Genealogy Project
                 </a><br /> 
                 Source for Middle-Earth genealogy data. 
