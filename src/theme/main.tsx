@@ -3,6 +3,7 @@ import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
+import AppBar from '@material-ui/core/AppBar';
 
 const theme = createMuiTheme({
     typography: {
@@ -22,7 +23,7 @@ const theme = createMuiTheme({
             secondary: '#2e0b00',
         },
         primary: { main: '#f9ecd7'},
-        secondary: {main: '#912400'},
+        secondary: {main: '#9e3513'},
         background: {
             default: '#f9ecd7',
         },
@@ -43,7 +44,7 @@ const theme = createMuiTheme({
 
 const BackButton = withStyles({
     root: {
-        backgroundColor: '#912400',
+        backgroundColor: theme.palette.secondary.main,
         position: 'fixed',
         bottom: '0',
         margin: '0.5em',
@@ -66,12 +67,22 @@ const CenteredContainer = withStyles({
     root: {
         display: 'flex',
         flexFlow: 'column',
-        alignItems: 'center'
+        alignItems: 'center',
+        margin: '6em auto'
     }
 })(Container);
 
+const AppMenu = withStyles({
+    root: {
+        backgroundColor: theme.palette.secondary.main,
+        color: theme.palette.primary.main,
+        padding: '1em'
+    }
+})(AppBar);
+
 export { 
     theme, 
+    AppMenu,
     BackButton, 
     ProfilePaper,
     CenteredContainer
