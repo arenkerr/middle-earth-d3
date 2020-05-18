@@ -39,6 +39,12 @@ const theme = createMuiTheme({
                 maxWidth: '460px'
               }
         },
+        MuiSvgIcon: {
+            root: {
+                width: 'none', // setting width and height in the component
+                height: 'none',
+            }
+        }
     }
 });
 
@@ -76,14 +82,23 @@ const AppMenu = withStyles({
     root: {
         backgroundColor: theme.palette.secondary.main,
         color: theme.palette.primary.main,
-        padding: '1em'
+        padding: '1em',
+        flexFlow: 'row',
+        justifyContent: 'space-between'
     }
 })(AppBar);
+
+const MenuButton = withStyles({
+    root: {
+        borderRadius: '10%'
+    }
+})(IconButton);
 
 export { 
     theme, 
     AppMenu,
     BackButton, 
+    MenuButton,
     ProfilePaper,
     CenteredContainer
 };

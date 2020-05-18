@@ -1,6 +1,7 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { CenteredContainer, AppMenu } from '../theme/main';
+import MenuBar from './MenuBar';
 import HomeAnimation from './HomeAnimation';
 import TreeHeader from './TreeHeader';
 
@@ -12,9 +13,7 @@ const text = {
 const Home = () => {
     return ( 
         <React.Fragment>
-            <AppMenu>
-                <Typography variant="h2">Middle-Earth Trees</Typography>
-            </AppMenu>
+            <MenuBar />
             <CenteredContainer>
                 <HomeAnimation />
                 {/* <ul>
