@@ -38,7 +38,6 @@ const MenuBar = () => {
                     PaperProps={{ 
                         style: { 
                             backgroundColor: '#fdf2e1', 
-                            transform: 'translate(0px, 14px)' 
                         } 
                     }}
                 >

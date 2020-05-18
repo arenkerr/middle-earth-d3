@@ -42,8 +42,19 @@ const theme = createMuiTheme({
         },
         MuiSvgIcon: {
             root: {
-                width: 'none', // setting width and height in the component
+                width: 'none', // set width and height in the component
                 height: 'none',
+            }
+        },
+        MuiIconButton: {
+            root: {
+                padding: '0',
+            }
+        },
+        MuiMenu: {
+            paper: {
+                top: '66px !important', //  !important is needed as mui injects inline styles
+                transform: 'none !important', // prevents scaling bug when window is resized or view changes
             }
         }
     }
@@ -55,6 +66,7 @@ const BackButton = withStyles({
         position: 'fixed',
         bottom: '0',
         margin: '0.5em',
+        padding: '12px',
         transition: 'background 1s',
         '&:hover': {
             backgroundColor: '#9e35139c',
@@ -75,7 +87,7 @@ const CenteredContainer = withStyles({
         display: 'flex',
         flexFlow: 'column',
         alignItems: 'center',
-        margin: '6em auto'
+        margin: '8em auto'
     }
 })(Container);
 

@@ -7,7 +7,7 @@ import { ExpandingHeader } from '../theme/main';
 
 const TreeHeader = ({ copy }) => (
     <ExpandingHeader elevation={1} defaultExpanded={true}>
-        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon width="2rem" height="2rem" />}>
             <Typography variant="h1">{copy.title}</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
