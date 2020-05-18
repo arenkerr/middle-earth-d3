@@ -5,7 +5,7 @@ import { BackButton } from '../theme/main';
 
 const Back = ({ history }) => (
     <BackButton onClick={() => history.goBack()}>
-        <ArrowBackIcon fontSize="large" color="primary"/>
+        <ArrowBackIcon fontSize="large" color="primary" width="1em" height="1em" />
     </BackButton>
 )
 

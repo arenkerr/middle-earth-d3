@@ -3,7 +3,7 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { mdiCompassRose } from '@mdi/js';
 import Icon from '@mdi/react';
-import { LegendExpander, LegendExpanderDetails, LegendExpanderSummary } from '../theme/expander';
+import { LegendExpander, LegendExpanderDetails, LegendExpanderSummary } from '../theme/legend';
 import { IconButton } from '@material-ui/core';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';

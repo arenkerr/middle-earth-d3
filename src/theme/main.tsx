@@ -4,6 +4,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
 import AppBar from '@material-ui/core/AppBar';
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 
 const theme = createMuiTheme({
     typography: {
@@ -56,7 +57,7 @@ const BackButton = withStyles({
         margin: '0.5em',
         transition: 'background 1s',
         '&:hover': {
-            backgroundColor: '#3b0f01',
+            backgroundColor: '#9e35139c',
         }
     }
 })(IconButton);
@@ -94,11 +95,19 @@ const MenuButton = withStyles({
     }
 })(IconButton);
 
+const ExpandingHeader = withStyles({
+    root: {
+        top: '64px',
+        margin: '0'
+    }
+})(ExpansionPanel)
+
 export { 
     theme, 
     AppMenu,
     BackButton, 
     MenuButton,
     ProfilePaper,
-    CenteredContainer
+    ExpandingHeader,
+    CenteredContainer,
 };
