@@ -4,7 +4,7 @@ const { ApolloServer, gql } = require('apollo-server-express');
 require('./config');
 
 // import models
-const { User } = require('./models/person');
+const { Person } = require('./models/person');
 
 // Import GraphQL components
 const typeDefs = require('./schema')

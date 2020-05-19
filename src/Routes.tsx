@@ -8,6 +8,7 @@ import MenAtanatari from './components/views/MenAtanatari';
 import MenAtani from './components/views/MenAtani';
 import All from './components/views/All';
 import About from './components/About';
+import Print from './components/Print';
 
 export const Routes = () => {
     return (
@@ -20,6 +21,7 @@ export const Routes = () => {
             <Route exact path="/men/atani" component={MenAtani} />
             <Route exact path="/all" component={All} />
             <Route exact path="/about" component={About} />
+            <Route exact path="/print" component={Print} />
             <Route component={Home} />
         </Switch>
     );

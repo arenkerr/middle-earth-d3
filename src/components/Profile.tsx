@@ -22,9 +22,9 @@ const Profile = ({ profile, open }) => {
         <Query query={GET_PROFILE} variables={{name}}>
             {((result: any) => {
                 const { loading, error, data } = result;
-                
                 if (loading) return <Loading />;
                 if (error) return <Error error={error} />;
+                console.log(result)
 
                 return (
                     <Modal 
@@ -37,7 +37,7 @@ const Profile = ({ profile, open }) => {
                             {profile.profile.dob && <span>b. {profile.profile.dob}</span>}
                             {profile.profile.dob && profile.profile.dod ? <span> | </span> : null}
                             {profile.profile.dod && <span>d. {profile.profile.dod}</span>}
-                            <p>{data.getPerson ? data.getPerson.bio : <em>No biography available.</em>}</p>
+                            <p>{data.getPerson.bio !== null ? data.getPerson.bio : <em>No biography available.</em>}</p>
                         </ProfilePaper>
                     </Modal>
                 )
