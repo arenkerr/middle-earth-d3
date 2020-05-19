@@ -8,6 +8,8 @@ const About = () => {
     return ( 
         <React.Fragment>
             <CenteredContainer>
+                <Typography variant="h1">About</Typography>
+                    <p></p>
                 <Typography variant="h1">Credits</Typography>
                 <a href="https://github.com/RobSis/middle-earth-genealogy-project" 
                     target="_blank" 

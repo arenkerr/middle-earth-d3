@@ -1,39 +1,37 @@
+@import './variables.scss';
+
 .tree {
     font-size: 14px;
 
     &__path {
-        stroke: #0a102e;
+        stroke: $redOrange;
         opacity: 0.2;
     }
 
     &__spouse-path {
-        stroke: #df722f;
+        stroke: $redOrange;
     }
 
     &__node {
         cursor: pointer;
         transition: fill 1s;
-        fill: #3b0f01;
-
-        &:hover {
-            fill:  #912400;
-        }
+        fill: $redOrange;
     }
 
     &__name-label {
-        fill: #3b0f01;
+        fill: $deepBlue;
         
         &--husband {
             cursor: pointer;
             &:hover {
-                fill: #912400;
+                fill: $redOrange;
                 transition: fill 1s;
             }
         }
     }
 
     &__spouse-label {
-        fill: #0a102e;
+        fill: $deepBlue;
         opacity: 0.25;
         font-style: italic;
     }

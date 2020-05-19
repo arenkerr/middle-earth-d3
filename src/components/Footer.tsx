@@ -5,7 +5,7 @@ import GitHubIcon from '@material-ui/icons/GitHub';
 import { IconButton } from '@material-ui/core';
 
 const Footer = () => (
-    <CenteredContainer>
+    <div className="footer">
         <ul className="inline-list">
             <li><Link to="/about">About</Link>&nbsp; | &nbsp;</li>
             <li>
@@ -18,7 +18,7 @@ const Footer = () => (
                 </IconButton>
             </li>
         </ul>
-    </CenteredContainer>
+    </div>
 )
 
 export default Footer;

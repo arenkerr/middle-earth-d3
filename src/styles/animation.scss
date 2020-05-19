@@ -1,3 +1,5 @@
+@import './variables';
+
 #home {  
     font-size: 1.3rem;
     font-family: 'Cormorant Unicase';
@@ -5,7 +7,7 @@
     path {
       fill-opacity: 0;
       opacity: 0;
-      stroke: rgb(145, 36, 0);
+      stroke: $redOrange;
       stroke-width: 1;
       stroke-dasharray: 2000;
       stroke-dashoffset: -2000;
@@ -22,13 +24,13 @@
     }
 
     text {
-        fill: rgb(145, 36, 0);
+        fill: $redOrange;
         opacity: 0;
         animation: fill-element 12s;
         animation-fill-mode: forwards;
 
         &:hover {
-            fill: #0a102e;
+            fill: $deepBlue;
             transition: fill 5s;
         }
     }
@@ -39,7 +41,7 @@
         animation-fill-mode: forwards;
 
         &:hover {
-            fill: #0a102e;
+            fill: $deepBlue;
             transition: fill 2s;
         }
     }

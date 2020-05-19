@@ -87,7 +87,8 @@ const CenteredContainer = withStyles({
         display: 'flex',
         flexFlow: 'column',
         alignItems: 'center',
-        margin: '8em auto'
+        margin: '8em auto 4em auto',
+        minHeight: '80vh'
     }
 })(Container);
 
