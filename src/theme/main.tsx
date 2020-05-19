@@ -56,7 +56,7 @@ const theme = createMuiTheme({
                 top: '66px !important', //  !important is needed as mui injects inline styles
                 transform: 'none !important', // prevents scaling bug when window is resized or view changes
             }
-        }
+        },
     }
 });
 
