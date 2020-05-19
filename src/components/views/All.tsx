@@ -1,10 +1,10 @@
 import React from 'react';
-import Tree from './Tree';
-import TreeHeader from './TreeHeader';
-import Back from './Back';
-import Legend from './Legend';
-import AllData from '../data/all.js';
-import { all as text } from '../data/mock.json';
+import Tree from '../Tree/Tree';
+import TreeHeader from '../Tree/TreeHeader';
+import Back from '../Back';
+import Legend from '../Legend/Legend';
+import AllData from '../../data/all';
+import { all as text } from '../../data/mock.json';
 
 const All = () => {
     // to give the user a starting point, scroll to Olwe, possibly the oldest member here

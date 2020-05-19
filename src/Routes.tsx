@@ -1,12 +1,12 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Home from './components/Home';
-import Elves from './components/Elves';
-import Hobbits from './components/Hobbits';
-import Dwarves from './components/Dwarves';
-import MenAtanatari from './components/MenAtanatari';
-import MenAtani from './components/MenAtani';
-import All from './components/All';
+import Home from './components/Home/Home';
+import Elves from './components/views/Elves';
+import Hobbits from './components/views/Hobbits';
+import Dwarves from './components/views/Dwarves';
+import MenAtanatari from './components/views/MenAtanatari';
+import MenAtani from './components/views/MenAtani';
+import All from './components/views/All';
 import About from './components/About';
 
 export const Routes = () => {

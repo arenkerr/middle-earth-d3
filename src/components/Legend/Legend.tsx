@@ -3,14 +3,14 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { mdiCompassRose } from '@mdi/js';
 import Icon from '@mdi/react';
-import { LegendExpander, LegendExpanderDetails, LegendExpanderSummary } from '../theme/legend';
+import { LegendExpander, LegendExpanderDetails, LegendExpanderSummary } from '../../theme/legend';
 import { IconButton } from '@material-ui/core';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableRow from '@material-ui/core/TableRow';
-import '../styles/legend.scss';
+import './legend.scss';
 
 const Legend = () => ( 
     <LegendExpander elevation={0}>

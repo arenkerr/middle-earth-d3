@@ -1,10 +1,10 @@
 import React from 'react';
-import Tree from './Tree';
-import TreeHeader from './TreeHeader'
-import Back from './Back';
-import Legend from './Legend';
-import elfData from '../data/elves.js';
-import { elves as text } from '../data/mock.json';
+import Tree from '../Tree/Tree';
+import TreeHeader from '../Tree/TreeHeader'
+import Back from '../Back';
+import Legend from '../Legend/Legend';
+import elfData from '../../data/elves.js';
+import { elves as text } from '../../data/mock.json';
 
 const Elves = () => (
     <div>

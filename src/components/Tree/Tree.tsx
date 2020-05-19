@@ -2,10 +2,10 @@ import React, { useRef, useEffect, useState } from 'react';
 import * as d3 from 'd3'; 
 import scrollIntoView from 'scroll-into-view';
 import Container from '@material-ui/core/Container';
-import buildHeirarchy from '../util/buildHeirarchy';
-import buildTable from '../util/buildTable';
-import Profile from './Profile';
-import '../styles/tree.scss';
+import buildHeirarchy from '../../util/buildHeirarchy';
+import buildTable from '../../util/buildTable';
+import Profile from '../Profile';
+import './tree.scss';
 
 function Chart({ treeData, size, translate, scrollTo = '' }) {
     // format data for use with D3
@@ -194,7 +194,7 @@ function Chart({ treeData, size, translate, scrollTo = '' }) {
             scrollIntoView(startPos);
             setScroll(false);
         };
-    });
+    }, [size.height, size.width, graph, data, translate, scrollTo, scroll]);
 
     return (
         <Container className="tree-container">
