@@ -15,7 +15,25 @@
     &__node {
         cursor: pointer;
         transition: fill 1s;
+        transition: stroke-width 4s ease;
         fill: $redOrange;
+    }
+
+    .tree_node--highlight {
+        stroke-width: 20px;
+        stroke: #0a102e29;
+        stroke-dasharray: 44;
+        animation: blink 2s infinite alternate;
+
+        &:hover {
+
+        }
+    }
+
+    @keyframes blink {
+        to {
+            stroke-width: 60px;
+        }
     }
 
     &__name-label {

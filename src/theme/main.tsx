@@ -40,12 +40,6 @@ const theme = createMuiTheme({
                 maxWidth: '460px'
               }
         },
-        MuiSvgIcon: {
-            root: {
-                width: 'none', // set width and height in the component
-                height: 'none',
-            }
-        },
         MuiIconButton: {
             root: {
                 padding: '0',
