@@ -9,7 +9,7 @@ const typeDefs = gql`
   
   type Mutation {
     addPerson(name: String!, tree_id: String!): Person
-    deletePerson(name: String!): Person
+    deletePerson(tree_id: String!, name: String): Person
     updateBio(name: String, bio: String!): Person @cacheControl(maxAge: 10)
   }
 

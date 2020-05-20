@@ -19,9 +19,10 @@ const resolvers = {
     },
     deletePerson: async (root, args) => {
       const deletedPerson = Person.findOneAndRemove({
+        tree_id: args.tree_id,
         name: args.name
       });
-
+      console.log('delete!!!!')
       return deletedPerson;
     },
     updateBio: async (root, args) => {

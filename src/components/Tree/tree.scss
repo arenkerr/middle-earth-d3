@@ -23,16 +23,12 @@
         stroke-width: 20px;
         stroke: #0a102e29;
         stroke-dasharray: 44;
-        animation: blink 2s infinite alternate;
-
-        &:hover {
-
-        }
+        animation: blink 1s infinite alternate;
     }
 
     @keyframes blink {
         to {
-            stroke-width: 60px;
+            stroke-width: 40px;
         }
     }
 

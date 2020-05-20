@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks'
 import Autocomplete from '@material-ui/lab/Autocomplete';
@@ -14,22 +14,32 @@ const GET_PROFILES = gql`
         }
     }`;
 
-const Search = () => {
-
-    const useStyles = makeStyles({
-        root: {
-            position: 'fixed',
-            top: '75px',
-            right: '0'
+const useStyles = makeStyles({
+    container: {
+        position: 'fixed',
+        top: '84px',
+        right: '84px',
+        paddingRight: '10px',
+        display: 'flex',
+        backgroundColor: '#fdf2e1'
+    },
+    searchButton: {
+        padding: '0 14px',
+        color: '#0a102e',
+        '&:hover': {
+            backgroundColor: 'transparent',
         }
-    });
+    }
+});
+
+const Search = () => {
 
     const classes = useStyles();
 
-    const [open, setOpen] = React.useState(false);
-    const [options, setOptions]= React.useState<any>([]);
-    const [value, setValue] = React.useState<any>();
-    const [highlight, setHighlight] = React.useState<any>(null);
+    const [open, setOpen] = useState(false);
+    const [options, setOptions]= useState<any>([]);
+    const [value, setValue] = useState<any>();
+    const [highlight, setHighlight] = useState<any>(null);
 
     const { loading, error, data } = useQuery(GET_PROFILES);
 
@@ -55,50 +65,50 @@ const Search = () => {
     }, [data, open, highlight]);
 
     return (
-        <Autocomplete
-        className={classes.root}
-        id="search-tree"
-        style={{ width: 300 }}
-        open={open}
-        onOpen={() => {
-            setOpen(true);
-        }}
-        onClose={() => {
-            setOpen(false);
-        }}
-        getOptionSelected={(option: any, value) => option.name === value.name}
-        getOptionLabel={(option) => option.name}
-        onChange={handleChange}
-        noOptionsText="Not found"
-        options={options}
-        loading={loading}
-        renderInput={(params) => (
-            <TextField
-            {...params}
-            label="Search Tree"
-            variant="outlined"
-            InputProps={{
-                ...params.InputProps,
-                endAdornment: (
-                <React.Fragment>
-                    {loading ? <CircularProgress color="inherit" size={20} /> : null}
-                    {params.InputProps.endAdornment}
-                    {   
-                        <InputAdornment position="end" hidden={false}>
-                            <IconButton
-                                aria-label="search-button"
-                                onMouseDown={getValuePos}
-                            >
-                                <SearchIcon/>
-                            </IconButton>
-                        </InputAdornment>
-                    }
-                </React.Fragment>
-                ),
+        <div className={classes.container}>
+            <Autocomplete
+            freeSolo
+            id="search-tree"
+            style={{ width: 300 }}
+            open={open}
+            onOpen={() => {
+                setOpen(true);
             }}
+            onClose={() => {
+                setOpen(false);
+            }}
+            getOptionSelected={(option: any, value) => option.name === value.name}
+            getOptionLabel={(option) => option.name}
+            onChange={handleChange}
+            noOptionsText="Not found"
+            options={options}
+            loading={loading}
+            renderInput={(params) => (
+                <TextField
+                {...params}
+                variant="filled"
+                InputProps={{
+                    ...params.InputProps,
+                    disableUnderline : true,
+                    endAdornment: (
+                    <React.Fragment>
+                        {params.InputProps.endAdornment}
+                        {/* {loading ? 'loading' : null} */}
+                    </React.Fragment>
+                    ),
+                }}
+                />
+            )}
             />
-        )}
-        />
+            <IconButton
+                className={classes.searchButton}
+                aria-label="search-button"
+                disabled={!value ? true : false}
+                onMouseDown={getValuePos}
+            >
+                <SearchIcon />
+            </IconButton>
+    </div>
     );
 }
 

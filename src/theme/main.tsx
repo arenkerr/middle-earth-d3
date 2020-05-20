@@ -5,6 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
 import AppBar from '@material-ui/core/AppBar';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 
 const theme = createMuiTheme({
     typography: {
@@ -47,18 +48,22 @@ const theme = createMuiTheme({
         },
         MuiMenu: {
             paper: {
-                top: '66px !important', //  !important is needed as mui injects inline styles
+                top: '75px !important', //  !important is needed as mui injects inline styles
                 transform: 'none !important', // prevents scaling bug when window is resized or view changes
             }
+        },
+        MuiFilledInput: {
+            root: {
+                backgroundColor: '#fdf2e1',
+                paddingBottom: '14px'
+            },
         },
     }
 });
 
-const BackButton = withStyles({
+const FloatingButton = withStyles({
     root: {
         backgroundColor: theme.palette.secondary.main,
-        position: 'fixed',
-        bottom: '0',
         margin: '0.5em',
         padding: '12px',
         transition: 'background 1s',
@@ -107,12 +112,12 @@ const ExpandingHeader = withStyles({
         top: '64px',
         margin: '0'
     }
-})(ExpansionPanel)
+})(ExpansionPanel);
 
 export { 
     theme, 
     AppMenu,
-    BackButton, 
+    FloatingButton, 
     MenuButton,
     ProfilePaper,
     ExpandingHeader,
