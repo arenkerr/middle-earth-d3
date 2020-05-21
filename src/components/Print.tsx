@@ -1,11 +1,11 @@
 import React from 'react';
 import buildHeirarchy from '../util/buildHeirarchy';
 import formatSeedProfile from '../util/formatSeedProfile';
-import elves from '../data/elves';
+import atanatari from '../data/men-atanatari';
 
 const Print = () => {
 
-    const data = buildHeirarchy(elves);
+    const data = buildHeirarchy(atanatari);
     console.log(data);
 
     const formattedData= formatSeedProfile(data);

@@ -51,7 +51,7 @@ const Search = ({ race }) => {
     const [highlight, setHighlight] = useState<any>(null);
 
     const { loading, error, data } = useQuery(race === 'all' ? GET_PROFILES : GET_PROFILES_RACE, { variables: { race }});
-    console.log(data);
+    if (error) console.log(error);
 
     const handleChange = (event, value) => {
         setValue(value);
