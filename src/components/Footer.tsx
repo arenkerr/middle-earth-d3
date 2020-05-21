@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { CenteredContainer } from '../theme/main';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import { IconButton } from '@material-ui/core';
 

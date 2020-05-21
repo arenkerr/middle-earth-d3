@@ -5,7 +5,6 @@ import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
 import AppBar from '@material-ui/core/AppBar';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import Autocomplete from '@material-ui/lab/Autocomplete';
 
 const theme = createMuiTheme({
     typography: {

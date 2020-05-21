@@ -13,7 +13,8 @@ const useStyles = makeStyles({
     }
 });
 
-const SearchFab = () => {
+const SearchFab = ({ race }) => {
+    console.log(race);
     const [open, setOpen] = useState(false);
     const classes = useStyles();
 
@@ -25,7 +26,7 @@ const SearchFab = () => {
                     : <CloseIcon fontSize="large" color="primary" width="1em" height="1em" />
                 }
             </FloatingButton>
-        { open && <Search />}
+        { open && <Search race={ race }/>}
         </div>
    )
 }

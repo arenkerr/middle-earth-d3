@@ -3,6 +3,7 @@ import Tree from '../Tree/Tree';
 import TreeHeader from '../Tree/TreeHeader';
 import Back from '../Back';
 import Legend from '../Legend/Legend';
+import SearchFab from '../SearchFab';
 import AllData from '../../data/all';
 import { all as text } from '../../data/mock.json';
 
@@ -14,6 +15,7 @@ const All = () => {
         <div>
             <TreeHeader copy={text} />
             <Tree treeData={AllData} size={{ height: 25000, width: 7400 }} translate={12800} scrollTo={nodeId}/>
+            <SearchFab race={"all"}/>
             <Back />
             <Legend />
         </div>

@@ -3,7 +3,8 @@ const Person = require('./models/person')
 const resolvers = {
   Query: {
     getPeople: async () => await Person.find(),
-    getPerson: async (root, args) => await Person.findOne(args)
+    getPerson: async (root, args) => await Person.findOne(args),
+    getPeopleByRace: async (root, args) => await Person.find(args)
   },
   Mutation: {
     addPerson: async (root, args) => {
@@ -22,18 +23,19 @@ const resolvers = {
         tree_id: args.tree_id,
         name: args.name
       });
-      console.log('delete!!!!')
       return deletedPerson;
     },
-    updateBio: async (root, args) => {
+    updatePerson: async (root, args) => {
       const updatedPerson = Person.findOneAndUpdate({
         name: args.name,
-        bio: args.bio
+        bio: args.bio,
+        race: args.race,
+        tree_id: args.tree_id
       });
 
       return updatedPerson;
     }
-  },
+  }
 }
 
 module.exports = resolvers;

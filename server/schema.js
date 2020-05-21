@@ -5,17 +5,19 @@ const typeDefs = gql`
     name: String!
     tree_id: String!
     bio: String
+    race: String
   }
   
   type Mutation {
     addPerson(name: String!, tree_id: String!): Person
     deletePerson(tree_id: String!, name: String): Person
-    updateBio(name: String, bio: String!): Person @cacheControl(maxAge: 10)
+    updatePerson(name: String, bio: String, race: String, tree_id: String): Person @cacheControl(maxAge: 10)
   }
 
   type Query {
     getPeople: [Person]
     getPerson(name: String!): Person
+    getPeopleByRace(race: String!): [Person]
   }`;
 
 module.exports = typeDefs;

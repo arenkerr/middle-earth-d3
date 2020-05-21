@@ -4,6 +4,7 @@ export default function formatSeedProfile(data, formattedData: any = []) {
             name: node.data.name,
             tree_id: node.data.id,
             bio: null,
+            race: 'Elf' 
         }
 
         formattedData.push(profile);

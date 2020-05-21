@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks'
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import { makeStyles, IconButton, TextField, CircularProgress, InputAdornment } from '@material-ui/core';
+import { makeStyles, IconButton, TextField } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import scrollIntoView from 'scroll-into-view';
 
@@ -13,6 +13,15 @@ const GET_PROFILES = gql`
             tree_id
         }
     }`;
+
+const GET_PROFILES_RACE = gql`
+query getPeopleByRace($race: String!) {
+    getPeopleByRace(race: $race) {
+        name
+        tree_id
+        race
+    }
+}`;
 
 const useStyles = makeStyles({
     container: {
@@ -32,8 +41,8 @@ const useStyles = makeStyles({
     }
 });
 
-const Search = () => {
-
+const Search = ({ race }) => {
+    console.log(race);
     const classes = useStyles();
 
     const [open, setOpen] = useState(false);
@@ -41,7 +50,8 @@ const Search = () => {
     const [value, setValue] = useState<any>();
     const [highlight, setHighlight] = useState<any>(null);
 
-    const { loading, error, data } = useQuery(GET_PROFILES);
+    const { loading, error, data } = useQuery(race === 'all' ? GET_PROFILES : GET_PROFILES_RACE, { variables: { race }});
+    console.log(data);
 
     const handleChange = (event, value) => {
         setValue(value);
@@ -57,8 +67,8 @@ const Search = () => {
     }
 
     useEffect(() => {
-        if (data && open) setOptions(data.getPeople);
-        console.log('useEffect', highlight);
+        if (data && open) setOptions(data.getPeople ? data.getPeople : data.getPeopleByRace);
+       
         if (highlight) {
             highlight.classList.add('tree_node--highlight');
         }
