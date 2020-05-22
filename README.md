@@ -16,6 +16,6 @@ Rendering genealogical data from J.R.R. Tolkien's legendarium into interactive v
 
 ## Demo
 
-[Middle-Earth D3](https://middle-earth-trees.netlify.app)
+[Middle-Earth Trees](https://middle-earth-trees.netlify.app)
 
 
