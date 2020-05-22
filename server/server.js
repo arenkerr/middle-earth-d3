@@ -1,6 +1,7 @@
 const cors = require('cors');
 const express = require('express');
 const { ApolloServer, gql } = require('apollo-server-express');
+require('dotenv').config()
 require('./config');
 
 // import models
@@ -17,6 +18,8 @@ const app = express();
 app.use(cors());
 server.applyMiddleware({ app });
 
-app.listen({ port: 4000 }, () =>
-  console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`)
+app.listen({ port: process.env.PORT || 4000 }, () =>
+  console.log(`🚀 Server ready on port: ${process.env.PORT || 4000}`)
 );
+
+
