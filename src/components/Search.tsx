@@ -42,7 +42,6 @@ const useStyles = makeStyles({
 });
 
 const Search = ({ race }) => {
-    console.log(race);
     const classes = useStyles();
 
     const [open, setOpen] = useState(false);

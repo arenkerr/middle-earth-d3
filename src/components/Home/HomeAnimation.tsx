@@ -5,12 +5,12 @@ import './animation.scss';
 const HomeAnimation = () => {
     return ( 
         <svg id="home" version="1.1" x="0px" y="0px" width="1000px"
-        height="1200px" viewBox="0 0 600 800" enable-background="new 0 0 600 800">
+        height="1200px" viewBox="0 0 600 800">
         <path fill="none" stroke="#912400" stroke-width="0.75" stroke-linecap="round" stroke-miterlimit="10" d="M334.567,85.778
         c0,50.537-33.547,19.417-33.547,77.058"/>
         <path fill="none" stroke="#912400" stroke-width="0.75" stroke-linecap="round" stroke-miterlimit="10" d="M326.677,202.563
         c24.78,14.278,9.428,43.852,9.428,43.852"/>
-        <Link to="/elves" class="link">
+        <Link to="/elves">
             <text x="538" y="460">Elves</text>
             <path id="elves" fill="#912400" d="M564,480.801c0,1.991-1.597,3.588-3.588,3.588s-3.588-1.597-3.588-3.588
             s1.597-3.588,3.588-3.588S564,478.81,564,480.801z"/>

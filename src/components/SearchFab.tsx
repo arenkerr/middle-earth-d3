@@ -14,7 +14,6 @@ const useStyles = makeStyles({
 });
 
 const SearchFab = ({ race }) => {
-    console.log(race);
     const [open, setOpen] = useState(false);
     const classes = useStyles();
 
