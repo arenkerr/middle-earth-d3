@@ -35,7 +35,10 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
     "scroll-into-view": "^1.14.2",
-    "typescript": "^3.7.5"
+    "typescript": "^3.7.5",
+    "@types/d3": "^5.7.2",
+    "@types/react": "^16.9.34",
+    "nodemon": "^2.0.4"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -59,12 +62,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@types/d3": "^5.7.2",
-    "@types/react": "^16.9.34",
-    "mongodb": "^3.5.7",
-    "nodemon": "^2.0.4"
   },
   "engines": {
     "node": "v13.7.0",
