@@ -2,14 +2,14 @@ const cors = require('cors');
 const express = require('express');
 const { ApolloServer, gql } = require('apollo-server-express');
 require('dotenv').config()
-require('./config');
+require('./server/config');
 
 // import models
-const { Person } = require('./models/person');
+const { Person } = require('./server/models/person');
 
 // Import GraphQL components
-const typeDefs = require('./schema')
-const resolvers = require('./resolvers')
+const typeDefs = require('./server/schema')
+const resolvers = require('./server/resolvers')
 
 
 // Set up Express server
