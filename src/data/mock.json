@@ -13,14 +13,15 @@
     },
     "menAtanatari": {
         "title": "Men: Atanatári",
-        "desc": "Atanatári is Quenya for the fathers of men, or the forefathers of the Edain. These are the Men who travelled to Beleriand and became allies of the Elves in the First Age."
+        "desc": "Atanatári is Quenya for the fathers of Men, or the forefathers of the Edain. These are the Men who travelled to Beleriand and became allies of the Elves in the First Age."
     },
     "menAtani": {
         "title": "Men: Atani",
-        "desc": "Atani is Quenya for Men. This tree includes Men of the second and third ages. The Second Age was the age of Númenor, an island kingdom of the Edain. The Númenoreans fell by end of the Second Age, though men still held some of their former glory in the kingdoms of Arnor and Gondor."
+        "desc": "Atani is Quenya for Men, and here represents Men after the First Age. The Second Age was the age of Númenor, an island kingdom of the Edain. The Númenoreans fell by end of the Second Age, though men still held some of their former glory in the kingdoms of Arnor and Gondor."
     },
     "all": {
         "title": "All",
         "desc": "The children of Eru Ilúvatar (the God of Arda) are Elves, Men, Dwarves and Hobbits. Elves are known as the first children of Ilúvatar and Men the second. Not shown here are the Ainur (Quenya, 'holy ones'), created by Ilúvatar at the beginning, which includes the Valar and Maiar. The exception is Melian, an Ainu who wedded an Elf (Thingol). The essence of the Ainur was continued in her descendents, which includes both Elves and Men."
     }
 }
+
