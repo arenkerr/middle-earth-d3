@@ -1,26 +1,26 @@
 {
     "elves": {
         "title": "Elves",
-        "desc": "The Elves, who called themselves the Quendi, and who in lore are commonly referred to as the Eldar (adj. Eldarin), were the first and eldest of the Children of Ilúvatar, and are considered to be the fairest and wisest of any race of Arda given sapience."
+        "desc": "Elves were the first people created by Eru Ilúvatar, and also referred to as the Eldar. In many ways they appear similar to Men, but are immortal, have keener senses, and are exceptionally graceful and fair."
     },
     "hobbits": {
         "title": "Hobbits",
-        "desc": "Hobbits, also known as Halflings, were an ancient mortal race that lived in Middle-earth. Although their exact origins are unknown, they were initially found in the northern regions of Middle-earth and below the Vales of Anduin. At the beginning of the Third Age, hobbits moved north and west. Most of their race eventually founded the land of the Shire in about the year TA 1601, though one type of hobbit known as Stoors remained in the Anduin Vale (the type of hobbit Sméagol was)."
+        "desc": "The exact origins of hobbits is unknown. They are usually between 2 and 4 feet in height, and for this reason are also known as 'halflings' by Men. There are three main types of hobbits: Harfoots ('hare-feet', smaller in stature than other hobbits, with browner skin), Stoors ('strong', larger in size and usually living near water) and Fallohides ('pale skin', taller in height than others, and friendly with elves)."
     },
     "dwarves": {
         "title": "Dwarves",
-        "desc": "The Dwarves were made by Aulë, whom they themselves called Mahal, meaning “maker.” Aulë was unwilling to wait for the coming of the Children of Ilúvatar, for he was impatient and desired to have someone to teach his lore and crafts. Therefore, he made the first Seven Fathers of the Dwarves in secret in a hall under the mountains of Middle-earth."
+        "desc": "Dwarves, or Khazad, as they call themselves, were created by Aulë. He was a smith and created dwarves so that he could pass on his knowledge. For this reason, they are known for their skills in mining and metallurgy. They are smaller than men but larger than hobbits, and are strong with a sturdy build."
     },
     "menAtanatari": {
-        "title": "Atanatari",
-        "desc": "Men of the first age."
+        "title": "Men: Atanatári",
+        "desc": "Atanatári is Quenya for the fathers of men, or the forefathers of the Edain. These are the Men who travelled to Beleriand and became allies of the Elves in the First Age."
     },
     "menAtani": {
-        "title": "Atani",
-        "desc": "Men of the second and third ages."
+        "title": "Men: Atani",
+        "desc": "Atani is Quenya for Men. This tree includes Men of the second and third ages. The Second Age was the age of Númenor, an island kingdom of the Edain. The Númenoreans fell by end of the Second Age, though men still held some of their former glory in the kingdoms of Arnor and Gondor."
     },
     "all": {
         "title": "All",
-        "desc": "The children of Eru Illuvatar"
+        "desc": "The children of Eru Ilúvatar (the God of Arda) are Elves, Men, Dwarves and Hobbits. Elves are known as the first children of Ilúvatar and Men the second. Not shown here are the Ainur (Quenya, 'holy ones'), created by Ilúvatar at the beginning, which includes the Valar and Maiar. The exception is Melian, an Ainu who wedded an Elf (Thingol). The essence of the Ainur was continued in her descendents, which includes both Elves and Men."
     }
 }
