@@ -1,19 +1,36 @@
 import React from 'react';
+import gql from 'graphql-tag';
+import { useQuery } from '@apollo/react-hooks'
 import Tree from '../Tree/Tree';
 import TreeHeader from '../Tree/TreeHeader';
 import Back from '../Back';
 import Legend from '../Legend/Legend';
 import SearchFab from '../SearchFab';
 import AllData from '../../data/all';
-import { all as text } from '../../data/mock.json';
+
+const GET_DESCRIPTION = gql`
+    query getRace($title: String!) {
+        getRace(title: $title) {
+            title
+            desc
+        }
+    }`;
 
 const All = () => {
-    // to give the user a starting point, scroll to Olwe, possibly the oldest member here
+    const { loading, error, data } = useQuery(GET_DESCRIPTION, { variables: { title: 'All' }});
+    if (error) console.log(error);
+    console.log(data);
+    let info;
+    if (data) {
+        info = data.getRace;
+        console.log(info)
+    }
+    // to give the user a starting point, scroll to Olwe
     // TODO: replace this with zoom in/out 
     const nodeId = 'node@I806a0e65c2@';
     return (
         <div>
-            <TreeHeader copy={text} />
+            {!loading && <TreeHeader copy={info} />}
             <Tree treeData={AllData} size={{ height: 25000, width: 7400 }} translate={12800} scrollTo={nodeId}/>
             <SearchFab race={"all"}/>
             <Back />
