@@ -11,23 +11,20 @@
       stroke-width: 1;
       stroke-dasharray: 2000;
       stroke-dashoffset: -2000;
-      animation: draw 10s;
-      animation-fill-mode: forwards;
+      animation: draw 10s forwards;
       animation-delay: -6s;
     }
 
     line {
         opacity: 0;
-        animation: draw 10s;
-        animation-fill-mode: forwards;
+        animation: draw 10s forwards;
         animation-delay: -6s;
     }
 
     text {
         fill: $redOrange;
         opacity: 0;
-        animation: fill-element 12s;
-        animation-fill-mode: forwards;
+        animation: fill-element 12s forwards;
 
         &:hover {
             fill: $deepBlue;
@@ -37,8 +34,7 @@
 
     #men1, #men2, #dwarves, #elves, #hobbits, #all {
         fill-opacity: 0;
-        animation: fill-element 12s;
-        animation-fill-mode: forwards;
+        animation: fill-element 12s forwards;
 
         &:hover {
             fill: $deepBlue;
