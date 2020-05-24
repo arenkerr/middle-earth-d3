@@ -24,7 +24,6 @@ const Profile = ({ profile, open }) => {
                 const { loading, error, data } = result;
                 if (loading) return <Loading />;
                 if (error) return <Error error={error} />;
-                console.log(result)
 
                 return (
                     <Modal 
