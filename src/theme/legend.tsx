@@ -14,9 +14,6 @@ const LegendExpander = withStyles({
         '&:before': {
             height: '0'
         }
-    },
-    'MuiExpansionPanelDetails-root': {
-        background: '#fdf2e1',
     }
 })(ExpansionPanel);
 

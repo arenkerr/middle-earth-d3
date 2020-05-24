@@ -1,6 +1,6 @@
 import React from 'react';
 import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/react-hooks';
 import Tree from '../Tree/Tree';
 import TreeHeader from '../Tree/TreeHeader';
 import Back from '../Back';
@@ -23,15 +23,15 @@ const All = () => {
     // to give the user a starting point, scroll to Olwe
     // TODO: replace this with zoom in/out 
     const nodeId = 'node@I806a0e65c2@';
-    
+
     return (
-        <div>
+        <React.Fragment>
             {!loading && <TreeHeader copy={data.getRace} />}
-            <Tree treeData={AllData} size={{ height: 25000, width: 7400 }} translate={12800} scrollTo={nodeId}/>
+            <Tree treeData={AllData} size={{ height: 25000, width: 7400 }} translate={12900} scrollTo={nodeId}/>
             <SearchFab race={"all"}/>
             <Back />
             <Legend />
-        </div>
+        </React.Fragment>
     )
 }
 
