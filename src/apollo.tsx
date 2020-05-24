@@ -1,6 +1,3 @@
 import ApolloClient from 'apollo-boost';
 
-export default new ApolloClient(process.env.NODE_ENV === 'production' ? 
-    { uri: 'https://middle-earth-server.herokuapp.com/graphql' } 
-    : { uri: 'http://localhost:4000/graphql' }
-);
+export default new ApolloClient({ uri: process.env.APOLLO_CLIENT || 'http://localhost:4000/graphql'});
