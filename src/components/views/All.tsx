@@ -19,18 +19,14 @@ const GET_DESCRIPTION = gql`
 const All = () => {
     const { loading, error, data } = useQuery(GET_DESCRIPTION, { variables: { title: 'All' }});
     if (error) console.log(error);
-    console.log(data);
-    let info;
-    if (data) {
-        info = data.getRace;
-        console.log(info)
-    }
+
     // to give the user a starting point, scroll to Olwe
     // TODO: replace this with zoom in/out 
     const nodeId = 'node@I806a0e65c2@';
+    
     return (
         <div>
-            {!loading && <TreeHeader copy={info} />}
+            {!loading && <TreeHeader copy={data.getRace} />}
             <Tree treeData={AllData} size={{ height: 25000, width: 7400 }} translate={12800} scrollTo={nodeId}/>
             <SearchFab race={"all"}/>
             <Back />
