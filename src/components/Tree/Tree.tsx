@@ -27,8 +27,8 @@ function Chart({ treeData, size, translate, scrollTo = '' }) {
     }
 
     d3.select('body').on('click', () => {
-        if (d3.event.path && d3.event.path[0].classList.contains('tree__node') === false) {
-            setShow(false)
+        if (d3.event.target.classList.contains('tree__node') === false) {
+            setShow(false);
         }
     });
 
