@@ -22,7 +22,7 @@ const MenAtanatari = () => {
 
     return (
         <React.Fragment>
-            {!loading && <TreeHeader copy={data.getRace} />}
+            {!loading && <TreeHeader copy={data.getRace}/>}
             <Tree treeData={MenAtanatariData} size={{ height: 3400, width: 1600 }} translate={1900}/>
             <SearchFab race={"Men: Atanatari"}/>
             <Back />

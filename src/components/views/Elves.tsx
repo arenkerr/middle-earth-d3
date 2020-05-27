@@ -18,11 +18,12 @@ const GET_DESCRIPTION = gql`
 
 const Elves = () => {
     const { loading, error, data } = useQuery(GET_DESCRIPTION, { variables: { title: 'Elves' }});
+    console.log(process.env.NODE_ENV);
     if (error) console.log(error);
 
     return (
         <React.Fragment>
-            {!loading && <TreeHeader copy={data.getRace} />}
+            {!loading && <TreeHeader copy={data.getRace}/>}
             <Tree treeData={elfData} size={{ height: 4600, width: 1200}} translate={2100}/>
             <SearchFab race={"Elf"}/>
             <Back />

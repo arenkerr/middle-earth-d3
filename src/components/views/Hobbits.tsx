@@ -22,7 +22,7 @@ const Hobbits = () => {
 
     return (
         <React.Fragment>
-            {!loading && <TreeHeader copy={data.getRace} />}
+            {!loading && <TreeHeader copy={data.getRace}/>}
             <Tree treeData={hobbitData} size={{ height: 10200, width: 1200 }} translate={4600}/>
             <SearchFab race={"Hobbit"}/>
             <Back />
