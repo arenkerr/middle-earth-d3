@@ -16,6 +16,6 @@ Rendering genealogical data from J.R.R. Tolkien's legendarium into interactive v
 
 ## Demo
 
+\*\*Note: the back end is currently down until I can migrate to a good free alternative to Heroku, so most of the app is not currently functional. However, if you are still curious, you can at least see what the front end looks like at the link below.
+
 [Middle-Earth Trees](https://middle-earth-trees.netlify.app)
-
-
